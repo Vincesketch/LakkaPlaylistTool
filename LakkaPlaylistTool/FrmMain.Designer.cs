@@ -71,10 +71,10 @@
             this.Controls.Add(this.btnGenerateLakka);
             this.Controls.Add(this.btnRetro);
             this.Controls.Add(this.btnLakka);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Lakka游戏列表维护工具  |  作者QQ:178029200";
+            this.Text = "Lakka游戏列表维护工具";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.ResumeLayout(false);
 
