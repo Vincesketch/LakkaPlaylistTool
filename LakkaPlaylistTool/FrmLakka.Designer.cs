@@ -228,6 +228,7 @@
             this.ClientSize = new System.Drawing.Size(629, 360);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmLakka";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lakka游戏列表维护";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

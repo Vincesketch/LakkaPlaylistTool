@@ -65,12 +65,6 @@
     <Compile Include="FrmEditRoms.Designer.cs">
       <DependentUpon>FrmEditRoms.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmRetro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmRetro.Designer.cs">
-      <DependentUpon>FrmRetro.cs</DependentUpon>
-    </Compile>
     <Compile Include="GameItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,9 +76,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLakka.resx">
       <DependentUpon>FrmLakka.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmRetro.resx">
-      <DependentUpon>FrmRetro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

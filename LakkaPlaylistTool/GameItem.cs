@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 
 namespace LakkaPlaylistTool
 {
@@ -66,7 +64,7 @@ namespace LakkaPlaylistTool
         /// <returns></returns>
         public string getRomShortFileNameWithExtension()
         {
-            return V1RomFullFileName.Split('/').Last();
+            return V1RomFullFileName.Split('/').Last().Split('\\').Last();
         }
         /// <summary>
         /// ROM短文件名 wolf
@@ -74,7 +72,7 @@ namespace LakkaPlaylistTool
         /// <returns></returns>
         public string getRomShortFileNameWithOutExtension()
         {
-            return V1RomFullFileName.Split('/').Last().Split('.').First();
+            return V1RomFullFileName.Split('/').Last().Split('\\').Last().Split('.').First();
         }
 
         public int CompareTo(GameItem obj)

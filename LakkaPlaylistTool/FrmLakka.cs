@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -29,7 +25,7 @@ namespace LakkaPlaylistTool
         /// </summary>
         private Dictionary<string, FileInfo> m_images = new Dictionary<string, FileInfo>();
 
-        private List<GameItem> m_filterGames = new List<GameItem>();
+        private List<GameItem> m_finallyGames = new List<GameItem>();
 
 
         public FrmLakka()
@@ -48,6 +44,7 @@ namespace LakkaPlaylistTool
             fileDialog.Multiselect = false;
             fileDialog.Title = "请选择Lakka游戏列表文件";
             fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
+
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 foreach (string file in fileDialog.FileNames)
@@ -57,7 +54,6 @@ namespace LakkaPlaylistTool
                     m_games = readLakkaGames(file);
                     this.label1.Text = ("载入<" + m_games.Count.ToString() + ">个ROM到内存。");
                 }
-
             }
         }
         private void btnLoadRomDir_Click(object sender, EventArgs e)
@@ -80,7 +76,6 @@ namespace LakkaPlaylistTool
             {
                 return "";
             }
-
             string s = sr.ReadLine();
             if (s.Contains("<hidden>") || s.Trim().Length == 0)
             {
@@ -103,7 +98,8 @@ namespace LakkaPlaylistTool
                 }
                 else
                 {
-                    this.label1.Text = "警告, ROM <" + item.V1RomFullFileName + "> 不是文件, 忽略.";
+                    MessageBox.Show("警告, ROM <" + item.V1RomFullFileName + "> 不是文件, 退出读取.");
+                    break;
                 }
                 item.V2RomCnName = readLine(reader);
                 item.V3coreBinaryPath = readLine(reader);
@@ -264,38 +260,6 @@ namespace LakkaPlaylistTool
             return count;
         }
 
-        private Dictionary<string, GameItem> readRetroGames(string filePath)
-        {
-            Dictionary<string, GameItem> games = new Dictionary<string, GameItem>();
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filePath);
-            XmlNode gameList = doc.SelectSingleNode("gameList");
-            foreach (XmlNode game in gameList.ChildNodes)
-            {
-                GameItem item = new GameItem();
-                // 将节点转换为元素，便于得到节点的属性值
-                XmlElement xe = (XmlElement)game;
-                item.V1RomFullFileName = "LAKKA_ROM_DIR/" + xe.SelectSingleNode("path").InnerText.Split('/').Last<string>();
-                item.V2RomCnName = xe.SelectSingleNode("name").InnerText.Trim().Replace("/", ""); ;
-                item.V3coreBinaryPath = "DETECT_CORE";
-                item.V4EmuType = "DETECT_TYPE";
-                item.V5Crc32 = "DETECT";
-                item.V6pListName = "PLAY_LIST_FILE_NAME";
-                item.handleSpecialChars();
-                //if (xe.SelectSingleNode("image") != null)
-                //{
-                //    item.image = xe.SelectSingleNode("image").InnerText.Trim().Split('/').Last<string>();
-                //}
-                //if (item.image.Length == 0)
-                //{
-                //    item.image = item.a2RomCnName;
-                //}
-                games.Add(item.V1RomFullFileName, item);
-            }
-            return games;
-        }
-
         void CheckAll()
         {
             List<string> removeList = new List<string>();
@@ -332,9 +296,9 @@ namespace LakkaPlaylistTool
             FrmEditRoms frm = new FrmEditRoms();
             frm.m_games = sortedList;
             frm.ShowDialog();
-            this.m_filterGames = frm.m_games;
+            this.m_finallyGames = frm.m_games;
             frm.Dispose();
-            this.label1.Text = ("编辑<" + this.m_filterGames.Count.ToString() + ">个ROM");
+            this.label1.Text = ("编辑<" + this.m_finallyGames.Count.ToString() + ">个ROM");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -352,7 +316,7 @@ namespace LakkaPlaylistTool
             fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                count = doAction(this.m_filterGames, fileDialog.FileName);
+                count = doAction(this.m_finallyGames, fileDialog.FileName);
 
             }
             this.label1.Text = ("保存<" + count.ToString() + ">个rom到新文件中");
