@@ -65,7 +65,7 @@
             this.txtLakkaList.Multiline = true;
             this.txtLakkaList.Name = "txtLakkaList";
             this.txtLakkaList.ReadOnly = true;
-            this.txtLakkaList.Size = new System.Drawing.Size(478, 84);
+            this.txtLakkaList.Size = new System.Drawing.Size(477, 84);
             this.txtLakkaList.TabIndex = 1;
             // 
             // txtLakkaRom
@@ -75,7 +75,7 @@
             this.txtLakkaRom.Multiline = true;
             this.txtLakkaRom.Name = "txtLakkaRom";
             this.txtLakkaRom.ReadOnly = true;
-            this.txtLakkaRom.Size = new System.Drawing.Size(478, 84);
+            this.txtLakkaRom.Size = new System.Drawing.Size(477, 84);
             this.txtLakkaRom.TabIndex = 3;
             // 
             // btnLoadRomDir
@@ -97,7 +97,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(293, 360);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(478, 90);
+            this.label1.Size = new System.Drawing.Size(477, 90);
             this.label1.TabIndex = 5;
             this.label1.Text = "工具主要作用：将复古Pi的游戏列表转换为Lakka格式，并且将图片重名为Lakka格式";
             // 
@@ -134,7 +134,7 @@
             this.txtRetro.Multiline = true;
             this.txtRetro.Name = "txtRetro";
             this.txtRetro.ReadOnly = true;
-            this.txtRetro.Size = new System.Drawing.Size(478, 84);
+            this.txtRetro.Size = new System.Drawing.Size(477, 84);
             this.txtRetro.TabIndex = 8;
             // 
             // btnRetroImageDir
@@ -157,15 +157,15 @@
             this.txtRetroImage.Multiline = true;
             this.txtRetroImage.Name = "txtRetroImage";
             this.txtRetroImage.ReadOnly = true;
-            this.txtRetroImage.Size = new System.Drawing.Size(478, 84);
+            this.txtRetroImage.Size = new System.Drawing.Size(477, 84);
             this.txtRetroImage.TabIndex = 11;
             // 
             // cbxCrc32
             // 
             this.cbxCrc32.AutoSize = true;
-            this.cbxCrc32.Location = new System.Drawing.Point(777, 363);
+            this.cbxCrc32.Location = new System.Drawing.Point(776, 363);
             this.cbxCrc32.Name = "cbxCrc32";
-            this.cbxCrc32.Size = new System.Drawing.Size(56, 19);
+            this.cbxCrc32.Size = new System.Drawing.Size(57, 19);
             this.cbxCrc32.TabIndex = 12;
             this.cbxCrc32.Text = "CRC32";
             this.toolTip1.SetToolTip(this.cbxCrc32, "生成CRC32会耗费比较长的时间");
@@ -176,7 +176,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel1.Controls.Add(this.btnRetro, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtLakkaList, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 4);
@@ -200,14 +200,13 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(836, 450);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // Form1
+            // FrmLakka
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 450);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Name = "FrmLakka";
             this.Text = "Lakka游戏列表维护工具  |  作者QQ:178029200";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -15,5 +15,26 @@ namespace LakkaPlaylistTool
         {
             InitializeComponent();
         }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLakka_Click(object sender, EventArgs e)
+        {
+            Form frm = new FrmLakka();
+            frm.ShowDialog(this);
+            frm.Dispose();
+        }
+
+        private void btnRetro_Click(object sender, EventArgs e)
+        {
+            Form frm = new FrmRetro();
+            frm.ShowDialog(this);
+            frm.Dispose();
+        }
+
+        
     }
 }

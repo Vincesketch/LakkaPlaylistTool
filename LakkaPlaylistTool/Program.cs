@@ -16,7 +16,7 @@ namespace LakkaPlaylistTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmLakka());
+            Application.Run(new FrmMain());
         }
     }
 }
