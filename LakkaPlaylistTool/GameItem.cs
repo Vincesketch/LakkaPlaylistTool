@@ -12,13 +12,17 @@ namespace LakkaPlaylistTool
         {
             V1RomFullFileName = V2RomCnName = V3core = V4EmuType = V5Crc32 = V6pListName = imageName = "";
         }
-        public String V1RomFullFileName { get; set; }
+        
+        // Put those two column in front to shown in front of the table
         public String V2RomCnName { get; set; }
+        public String imageName { get; set; }
+
+        public String V1RomFullFileName { get; set; }
         public String V3core { get; set; }
         public String V4EmuType { get; set; }
         public String V5Crc32 { get; set; }
         public String V6pListName { get; set; }
-        public String imageName { get; set; }
+        
         public Image image { get; set; }
         
         public void handleILegalChars()
