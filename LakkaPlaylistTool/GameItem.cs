@@ -6,33 +6,75 @@ using System.Text;
 
 namespace LakkaPlaylistTool
 {
+    /// <summary>
+    /// /storage/roms/n64/Legend of Zelda, The - Ocarina of Time (USA).n64
+    /// Legend of Zelda, The - Ocarina of Time (USA)
+    /// /tmp/cores/mupen64plus_libretro.so
+    /// Nintendo 64 (Mupen64Plus)
+    /// EC95702D|crc
+    /// Nintendo - Nintendo 64.lpl
+    /// <see cref="http://www.lakka.tv/doc/Playlists/"/>
+    /// </summary>
     public class GameItem : IComparable<GameItem>
     {
         public GameItem()
         {
-            V1RomFullFileName = V2RomCnName = V3core = V4EmuType = V5Crc32 = V6pListName = imageName = "";
+            V1RomFullFileName = V2RomCnName = V3coreBinaryPath = V4EmuType = V5Crc32 = V6pListName = imageFullName = "";
         }
         
-        // Put those two column in front to shown in front of the table
+        /// <summary>
+        /// ROM中文名称
+        /// </summary>
         public String V2RomCnName { get; set; }
-        public String imageName { get; set; }
-
-        public String V1RomFullFileName { get; set; }
-        public String V3core { get; set; }
-        public String V4EmuType { get; set; }
-        public String V5Crc32 { get; set; }
-        public String V6pListName { get; set; }
-        
         public Image image { get; set; }
-        
-        public void handleILegalChars()
+
+        /// <summary>
+        /// ROM在Linux系统中的路径
+        /// </summary>
+        public String V1RomFullFileName { get; set; }
+        /// <summary>
+        ///  模拟器核心
+        /// </summary>
+        public String V3coreBinaryPath { get; set; }
+        /// <summary>
+        /// 模拟器核心的名称
+        /// </summary>
+        public String V4EmuType { get; set; }
+        /// <summary>
+        /// CRC32
+        /// </summary>
+        public String V5Crc32 { get; set; }
+        /// <summary>
+        /// 游戏列表文件的文件名
+        /// </summary>
+        public String V6pListName { get; set; }
+
+
+        /// <summary>
+        /// 图片全路径
+        /// </summary>
+        public String imageFullName;
+
+        public void handleSpecialChars()
         {
             this.V2RomCnName = this.V2RomCnName.Replace(":", "_").Replace("/", "").Replace(@"\", "").Replace("|", "").Replace("*", "").Replace("<", "(").Replace(">", ")").Replace("?", "_").Replace(@"""", "_");
         }
 
-        public string getRomShortFileName()
+        /// <summary>
+        /// ROM短文件名 wolf.zip
+        /// </summary>
+        /// <returns></returns>
+        public string getRomShortFileNameWithExtension()
         {
             return V1RomFullFileName.Split('/').Last();
+        }
+        /// <summary>
+        /// ROM短文件名 wolf
+        /// </summary>
+        /// <returns></returns>
+        public string getRomShortFileNameWithOutExtension()
+        {
+            return V1RomFullFileName.Split('/').Last().Split('.').First();
         }
 
         public int CompareTo(GameItem obj)

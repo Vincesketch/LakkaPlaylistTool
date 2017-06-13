@@ -15,9 +15,23 @@ namespace LakkaPlaylistTool
 
     public partial class FrmLakka : Form
     {
+        /// <summary>
+        /// Key : ROM name, wolf
+        /// </summary>
         private Dictionary<string, GameItem> m_games = new Dictionary<string, GameItem>();
-        private Dictionary<string, string> m_roms = new Dictionary<string, string>();
+        /// <summary>
+        /// Key : ROM name, wolf
+        /// </summary>
+        private Dictionary<string, FileInfo> m_roms = new Dictionary<string, FileInfo>();
+
+        /// <summary>
+        /// Key : ROM name, wolf
+        /// </summary>
         private Dictionary<string, FileInfo> m_images = new Dictionary<string, FileInfo>();
+
+        private List<GameItem> m_filterGames = new List<GameItem>();
+
+
         public FrmLakka()
         {
             InitializeComponent();
@@ -40,20 +54,11 @@ namespace LakkaPlaylistTool
                 {
                     this.txtLakkaList.Text = file;
                     // Read into memory
-                    Dictionary<string, GameItem> games = readLakkaGames(file);
-                    // Merge to Data Base
-                    foreach (GameItem item in games.Values)
-                    {
-                        m_games[item.V1RomFullFileName] = item;
-                    }
-                    this.label1.Text = ("载入<" + games.Count.ToString() + ">个游戏到内存，目前内存共有<" + m_games.Count.ToString() + ">个游戏");
+                    m_games = readLakkaGames(file);
+                    this.label1.Text = ("载入<" + m_games.Count.ToString() + ">个ROM到内存。");
                 }
 
             }
-        }
-        private void btnRetro_Click(object sender, EventArgs e)
-        {
-            
         }
         private void btnLoadRomDir_Click(object sender, EventArgs e)
         {
@@ -64,13 +69,7 @@ namespace LakkaPlaylistTool
             {
                 string foldPath = dialog.SelectedPath;
                 txtLakkaRom.Text = foldPath;
-
-                m_roms.Clear();
-                DirectoryInfo theFolder = new DirectoryInfo(foldPath);
-                foreach (FileInfo file in theFolder.GetFiles())
-                {
-                    m_roms.Add(file.Name, file.FullName);
-                }
+                m_roms = readRomToMem(foldPath);
                 this.label1.Text = ("检测到<" + m_roms.Count.ToString() + ">个游戏ROM");
             }
         }
@@ -107,12 +106,12 @@ namespace LakkaPlaylistTool
                     this.label1.Text = "警告, ROM <" + item.V1RomFullFileName + "> 不是文件, 忽略.";
                 }
                 item.V2RomCnName = readLine(reader);
-                item.V3core = readLine(reader);
+                item.V3coreBinaryPath = readLine(reader);
                 item.V4EmuType = readLine(reader);
                 item.V5Crc32 = readLine(reader);
                 item.V6pListName = readLine(reader);
 
-                item.handleILegalChars();
+                item.handleSpecialChars();
             }
             reader.Close();
             return games;
@@ -127,52 +126,65 @@ namespace LakkaPlaylistTool
         }
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            if (m_games.Count == 0 || m_roms.Count == 0)
+
+        }
+        private void btnRetroImageDir_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "请选择ROM图片文件夹路径";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("请先进行选择");
-                return;
+                string foldPath = dialog.SelectedPath;
+                txtRetroImage.Text = foldPath;
+
+                m_images = readImgToMem(foldPath);
+                this.label1.Text = ("检测到<" + m_images.Count.ToString() + ">个图片");
             }
-            //--------------------------------------------------------------------
-            int count = 0;
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.Title = "保存Lakka游戏列表文件";
-            fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                //排序
-                List<GameItem> sortedList = new List<GameItem>();
-                sortedList.AddRange(m_games.Values);
-                sortedList.Sort();
-
-                readImageToMem(sortedList);
-
-                FrmEditRoms frm = new FrmEditRoms();
-                frm.m_games = sortedList;
-                frm.ShowDialog();
-
-                count = doAction(frm.m_games, fileDialog.FileName);
-
-            }
-            this.label1.Text = ("保存" + count.ToString() + "个rom到新文件中");
-            MessageBox.Show(this.label1.Text);
         }
 
-        private void readImageToMem(List<GameItem> games)
+        private Dictionary<string, FileInfo> readRomToMem(string dir)
+        {
+            Dictionary<string, FileInfo> roms = new Dictionary<string, FileInfo>();
+            FileInfo[] fileList = new DirectoryInfo(dir).GetFiles();
+            foreach (FileInfo file in fileList)
+            {
+                roms.Add(file.Name.Split('.').First(), file);
+            }
+            return roms;
+        }
+
+        private Dictionary<string, FileInfo> readImgToMem(string dir)
+        {
+            Dictionary<string, FileInfo> images = new Dictionary<string, FileInfo>();
+            // 加载所有图片到内存中
+            FileInfo[] fileList = new DirectoryInfo(dir).GetFiles("*.jpg");
+            foreach (FileInfo file in fileList)
+            {
+                images.Add(file.Name.Split('.').First(), file);
+            }
+            fileList = new DirectoryInfo(dir).GetFiles("*.png");
+            foreach (FileInfo file in fileList)
+            {
+                images.Add(file.Name.Split('.').First(), file);
+            }
+            return images;
+        }
+        private void readImageBitToMem(List<GameItem> games)
         {
             if (txtRetroImage.Text.Length > 0)
             {
                 foreach (GameItem item in games)
                 {
-                    bool havePic = false;
-                    string picName = item.getRomShortFileName().Split('.').First() + ".jpg";
-                    if (m_images.ContainsKey(picName)) havePic = true;
-                    if (!havePic) picName = item.getRomShortFileName().Split('.').First() + ".png";
-                    if (m_images.ContainsKey(picName)) havePic = true;
-                    if (havePic)
+                    FileInfo fi = null;
+                    if (!m_images.TryGetValue(item.getRomShortFileNameWithOutExtension(), out fi))
                     {
-                        FileInfo ff = m_images[picName];
-                        item.image = Image.FromFile(ff.FullName);
-                        item.imageName = picName;
+                        m_images.TryGetValue(item.V2RomCnName, out fi);
+                    }
+                    if (fi != null)
+                    {
+                        item.image = Image.FromFile(fi.FullName);
+                        item.imageFullName = fi.FullName;
                     }
                 }
             }
@@ -180,15 +192,16 @@ namespace LakkaPlaylistTool
         private int doAction(List<GameItem> games, string newFileName)
         {
             int count = 0;
+            if (games.Count() == 0) return 0;
             //输出
             FileStream fs = File.Create(newFileName);
             foreach (GameItem item in games)
             {
-                if (!m_roms.ContainsKey(item.getRomShortFileName())) continue;
-                if (this.cbxCrc32.Checked) item.V5Crc32 = FileToCRC32.GetLakkaCRC32(m_roms[item.getRomShortFileName()]);
+                if (!m_roms.ContainsKey(item.getRomShortFileNameWithOutExtension())) continue;
+                if (this.cbxCrc32.Checked) item.V5Crc32 = FileToCRC32.GetLakkaCRC32(m_roms[item.getRomShortFileNameWithOutExtension()].FullName);
                 writeStrToFile(fs, item.V1RomFullFileName);
                 writeStrToFile(fs, item.V2RomCnName);
-                writeStrToFile(fs, item.V3core);
+                writeStrToFile(fs, item.V3coreBinaryPath);
                 writeStrToFile(fs, item.V4EmuType);
                 writeStrToFile(fs, item.V5Crc32);
                 writeStrToFile(fs, item.V6pListName);
@@ -199,12 +212,12 @@ namespace LakkaPlaylistTool
 
             // 重新拷贝ROM
             FileInfo fi1 = new FileInfo(newFileName);
-            string newRomDir = newFileName + "\\" + fi1.Name + "_ROM";
+            string newRomDir = fi1.DirectoryName + "\\" + fi1.Name + "_ROM";
             Directory.CreateDirectory(newRomDir);
             foreach (GameItem item in games)
             {
-                FileInfo fi = new FileInfo(m_roms[item.getRomShortFileName()]);
-                string newRomName = newRomDir + "\\" + item.V2RomCnName + fi.Extension;
+                FileInfo fi = m_roms[item.getRomShortFileNameWithOutExtension()];
+                string newRomName = newRomDir + "\\" + item.getRomShortFileNameWithOutExtension() + fi.Extension;
                 try
                 {
                     // 对每一个rom
@@ -219,7 +232,7 @@ namespace LakkaPlaylistTool
                 }
             }
 
-                if (txtRetroImage.Text.Length > 0)
+            if (txtRetroImage.Text.Length > 0)
             {
                 // 创建新的图片目录
                 FileInfo fi = new FileInfo(newFileName);
@@ -227,9 +240,9 @@ namespace LakkaPlaylistTool
                 Directory.CreateDirectory(newImageDir);
                 foreach (GameItem item in games)
                 {
-                    if (item.imageName != "")
+                    if (item.imageFullName != "")
                     {
-                        FileInfo ff = m_images[item.imageName];
+                        FileInfo ff = new FileInfo(item.imageFullName);
                         string newImageName = newImageDir + "\\" + item.V2RomCnName + ff.Extension;
                         try
                         {
@@ -265,11 +278,11 @@ namespace LakkaPlaylistTool
                 XmlElement xe = (XmlElement)game;
                 item.V1RomFullFileName = "LAKKA_ROM_DIR/" + xe.SelectSingleNode("path").InnerText.Split('/').Last<string>();
                 item.V2RomCnName = xe.SelectSingleNode("name").InnerText.Trim().Replace("/", ""); ;
-                item.V3core = "DETECT_CORE";
+                item.V3coreBinaryPath = "DETECT_CORE";
                 item.V4EmuType = "DETECT_TYPE";
                 item.V5Crc32 = "DETECT";
                 item.V6pListName = "PLAY_LIST_FILE_NAME";
-                item.handleILegalChars();
+                item.handleSpecialChars();
                 //if (xe.SelectSingleNode("image") != null)
                 //{
                 //    item.image = xe.SelectSingleNode("image").InnerText.Trim().Split('/').Last<string>();
@@ -283,28 +296,67 @@ namespace LakkaPlaylistTool
             return games;
         }
 
-        private void btnRetroImageDir_Click(object sender, EventArgs e)
+        void CheckAll()
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = "请选择ROM图片文件夹路径";
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            List<string> removeList = new List<string>();
+            foreach (GameItem game in m_games.Values)
             {
-                string foldPath = dialog.SelectedPath;
-                txtRetroImage.Text = foldPath;
-
-                // 加载所有图片到内存中
-                FileInfo[] fis = new DirectoryInfo(foldPath).GetFiles("*.jpg");
-                foreach (FileInfo f in fis)
+                if (!m_roms.ContainsKey(game.getRomShortFileNameWithOutExtension()) &&
+                    !m_roms.ContainsKey(game.V2RomCnName))
                 {
-                    m_images[f.Name] = f;
-                }
-                fis = new DirectoryInfo(foldPath).GetFiles("*.png");
-                foreach (FileInfo f in fis)
-                {
-                    m_images[f.Name] = f;
+                    removeList.Add(game.getRomShortFileNameWithOutExtension());
                 }
             }
+            foreach (string s in removeList)
+            {
+                m_games.Remove(s);
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (m_games.Count == 0 || m_roms.Count == 0)
+            {
+                MessageBox.Show("请先进行选择");
+                return;
+            }
+            CheckAll();
+
+            //排序
+            List<GameItem> sortedList = new List<GameItem>();
+            sortedList.AddRange(m_games.Values);
+            sortedList.Sort();
+
+            readImageBitToMem(sortedList);
+
+            FrmEditRoms frm = new FrmEditRoms();
+            frm.m_games = sortedList;
+            frm.ShowDialog();
+            this.m_filterGames = frm.m_games;
+            frm.Dispose();
+            this.label1.Text = ("编辑<" + this.m_filterGames.Count.ToString() + ">个ROM");
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (m_games.Count == 0 || m_roms.Count == 0)
+            {
+                MessageBox.Show("请先进行选择");
+                return;
+            }
+            CheckAll();
+            //--------------------------------------------------------------------
+            int count = 0;
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.Title = "保存Lakka游戏列表文件";
+            fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                count = doAction(this.m_filterGames, fileDialog.FileName);
+
+            }
+            this.label1.Text = ("保存<" + count.ToString() + ">个rom到新文件中");
+            MessageBox.Show(this.label1.Text);
         }
     }
 }
