@@ -53,6 +53,12 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmLakka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLakka.Designer.cs">
+      <DependentUpon>FrmLakka.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmEditRoms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLakka.resx">
+      <DependentUpon>FrmLakka.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
