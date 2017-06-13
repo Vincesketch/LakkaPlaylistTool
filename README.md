@@ -1,4 +1,7 @@
 # LakkaPlaylistTool
+
+Developed By Microsoft C#, DotNet 4.0 framework.
+
 Maintain Lakka playlist and convert Retro playlist to Lakka
 
 主要功能：
