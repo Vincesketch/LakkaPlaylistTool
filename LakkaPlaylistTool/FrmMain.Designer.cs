@@ -72,6 +72,7 @@
             this.Controls.Add(this.btnRetro);
             this.Controls.Add(this.btnLakka);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lakka游戏列表维护工具";
