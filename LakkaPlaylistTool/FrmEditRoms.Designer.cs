@@ -66,8 +66,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(138, 20);
-            this.toolStripStatusLabel1.Text = "按键盘Del键可删除";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(268, 20);
+            this.toolStripStatusLabel1.Text = "按键盘Del键可删除(支持选中多行删除)";
             // 
             // FrmEditRoms
             // 

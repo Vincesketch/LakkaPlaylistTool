@@ -49,7 +49,7 @@
             this.btnRetro.Name = "btnRetro";
             this.btnRetro.Size = new System.Drawing.Size(322, 54);
             this.btnRetro.TabIndex = 1;
-            this.btnRetro.Text = "简易转换Retro列表为Lakka格式";
+            this.btnRetro.Text = "转换Retro列表为Lakka格式";
             this.btnRetro.UseVisualStyleBackColor = true;
             this.btnRetro.Click += new System.EventHandler(this.btnRetro_Click);
             // 
@@ -59,7 +59,7 @@
             this.btnGenerateLakka.Name = "btnGenerateLakka";
             this.btnGenerateLakka.Size = new System.Drawing.Size(322, 54);
             this.btnGenerateLakka.TabIndex = 2;
-            this.btnGenerateLakka.Text = "根据ROM目录生成简易Lakka列表";
+            this.btnGenerateLakka.Text = "根据ROM目录生成Lakka列表";
             this.btnGenerateLakka.UseVisualStyleBackColor = true;
             this.btnGenerateLakka.Click += new System.EventHandler(this.btnGenerateLakka_Click);
             // 
