@@ -69,7 +69,7 @@ namespace LakkaPlaylistTool
             {
                 string foldPath = dialog.SelectedPath;
                 DirectoryInfo di = new DirectoryInfo(foldPath);
-                FileInfo[] files = di.GetFiles("*.zip");
+                FileInfo[] files = di.GetFiles();//di.GetFiles("*.zip");
                 Dictionary<string, GameItem> games = new Dictionary<string, GameItem>();
                 foreach (FileInfo fi in files)
                 {
@@ -89,8 +89,13 @@ namespace LakkaPlaylistTool
                 fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    //排序
+                    List<GameItem> sortedList = new List<GameItem>();
+                    sortedList.AddRange(games.Values);
+                    sortedList.Sort();
+
                     FileStream fs = File.Create(fileDialog.FileName);
-                    foreach (GameItem item in games.Values)
+                    foreach (GameItem item in sortedList)
                     {
                         writeStrToFile(fs, item.V1RomFullFileName);
                         writeStrToFile(fs, item.V2RomCnName);
