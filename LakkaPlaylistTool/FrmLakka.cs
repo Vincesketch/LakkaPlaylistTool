@@ -83,7 +83,7 @@ namespace LakkaPlaylistTool
             }
             return s.Trim();
         }
-        private Dictionary<string, GameItem> readLakkaGames(string filePath)
+        public Dictionary<string, GameItem> readLakkaGames(string filePath)
         {
             StreamReader reader = File.OpenText(filePath);
             Dictionary<string, GameItem> games = new Dictionary<string, GameItem>();

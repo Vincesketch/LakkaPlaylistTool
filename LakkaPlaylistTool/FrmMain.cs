@@ -151,5 +151,52 @@ namespace LakkaPlaylistTool
             }
             return games;
         }
+
+        private void btnLakka2Retro_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Multiselect = false;
+            fileDialog.Title = "请选择Retro游戏列表文件";
+            fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                foreach (string file in fileDialog.FileNames)
+                {
+                    // Read into memory
+                    FrmLakka frm = new FrmLakka();
+                    Dictionary<string, GameItem> games = frm.readLakkaGames(file);
+
+                    FileInfo fi = new FileInfo(file);
+                    string newRetroFileName = fi.DirectoryName + "\\" + fi.Name.Split('.').First() + ".xml";
+                    XmlDocument xmlDoc = new XmlDocument();
+                    XmlDeclaration Declaration = xmlDoc.CreateXmlDeclaration("1.0", "utf-8", null);
+                    XmlNode rootNode = xmlDoc.CreateElement("gameList");
+                    xmlDoc.AppendChild(rootNode);
+                    foreach (GameItem item in games.Values)
+                    {
+                        XmlNode gameNode = xmlDoc.CreateElement("game");
+                        rootNode.AppendChild(gameNode);
+
+                        XmlNode pathNode = xmlDoc.CreateElement("path");
+                        pathNode.InnerText = item.V1RomFullFileName;
+                        gameNode.AppendChild(pathNode);
+
+                        XmlNode nameNode = xmlDoc.CreateElement("name");
+                        nameNode.InnerText = item.V2RomCnName;
+                        gameNode.AppendChild(nameNode);
+
+                        XmlNode imgNode = xmlDoc.CreateElement("image");
+                        imgNode.InnerText = item.V2RomCnName + ".png";
+                        gameNode.AppendChild(imgNode);
+
+                        
+                    }
+                    xmlDoc.InsertBefore(Declaration, xmlDoc.DocumentElement);
+                    xmlDoc.Save(newRetroFileName);
+                    MessageBox.Show("成功转换<" + games.Count.ToString() + ">个游戏");
+                }
+
+            }
+        }
     }
 }

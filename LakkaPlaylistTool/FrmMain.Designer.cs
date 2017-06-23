@@ -31,6 +31,7 @@
             this.btnLakka = new System.Windows.Forms.Button();
             this.btnRetro = new System.Windows.Forms.Button();
             this.btnGenerateLakka = new System.Windows.Forms.Button();
+            this.btnLakka2Retro = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLakka
@@ -63,11 +64,22 @@
             this.btnGenerateLakka.UseVisualStyleBackColor = true;
             this.btnGenerateLakka.Click += new System.EventHandler(this.btnGenerateLakka_Click);
             // 
+            // btnLakka2Retro
+            // 
+            this.btnLakka2Retro.Location = new System.Drawing.Point(81, 243);
+            this.btnLakka2Retro.Name = "btnLakka2Retro";
+            this.btnLakka2Retro.Size = new System.Drawing.Size(322, 54);
+            this.btnLakka2Retro.TabIndex = 3;
+            this.btnLakka2Retro.Text = "转换Lakka列表为Retro格式";
+            this.btnLakka2Retro.UseVisualStyleBackColor = true;
+            this.btnLakka2Retro.Click += new System.EventHandler(this.btnLakka2Retro_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 255);
+            this.ClientSize = new System.Drawing.Size(475, 318);
+            this.Controls.Add(this.btnLakka2Retro);
             this.Controls.Add(this.btnGenerateLakka);
             this.Controls.Add(this.btnRetro);
             this.Controls.Add(this.btnLakka);
@@ -86,5 +98,6 @@
         private System.Windows.Forms.Button btnLakka;
         private System.Windows.Forms.Button btnRetro;
         private System.Windows.Forms.Button btnGenerateLakka;
+        private System.Windows.Forms.Button btnLakka2Retro;
     }
 }
