@@ -193,7 +193,7 @@ namespace LakkaPlaylistTool
                     }
                     xmlDoc.InsertBefore(Declaration, xmlDoc.DocumentElement);
                     xmlDoc.Save(newRetroFileName);
-                    MessageBox.Show("成功转换<" + games.Count.ToString() + ">个游戏");
+                    MessageBox.Show("成功转换<" + games.Count.ToString() + ">个游戏到文件<" + newRetroFileName + ">中。");
                 }
 
             }
