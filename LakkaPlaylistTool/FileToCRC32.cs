@@ -93,21 +93,28 @@ namespace LakkaPlaylistTool
         {
             if (!File.Exists(filePath)) return "-";
 
-            UInt32 crc = 0xFFFFFFFF;
-            byte ch;
-            FileStream fp1 = new FileStream(filePath, FileMode.Open);
-            long len = fp1.Length;
-            for (long i = 0; i < len; i++)
+            try
             {
-                ch = (byte)fp1.ReadByte();
-                crc = ((crc >> 8) & 0x00FFFFFF) ^ Crc32Table[(crc ^ ch) & 0xFF];
-            }
-            crc = crc ^ 0xFFFFFFFF;
-            fp1.Close();
-            fp1.Dispose();
+                UInt32 crc = 0xFFFFFFFF;
+                byte ch;
+                FileStream fp1 = new FileStream(filePath, FileMode.Open);
+                long len = fp1.Length;
+                for (long i = 0; i < len; i++)
+                {
+                    ch = (byte)fp1.ReadByte();
+                    crc = ((crc >> 8) & 0x00FFFFFF) ^ Crc32Table[(crc ^ ch) & 0xFF];
+                }
+                crc = crc ^ 0xFFFFFFFF;
+                fp1.Close();
+                fp1.Dispose();
 
-            Console.WriteLine("CRC32: " + crc.ToString("X"));
-            return crc.ToString("X");
+                Console.WriteLine("CRC32: " + crc.ToString("X"));
+                return crc.ToString("X");
+            }
+            catch
+            {
+                return "-";
+            }
         }
     }
 }
