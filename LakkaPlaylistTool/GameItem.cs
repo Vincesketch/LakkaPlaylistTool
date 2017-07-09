@@ -55,7 +55,7 @@ namespace LakkaPlaylistTool
 
         public void handleSpecialChars()
         {
-            this.V2RomCnName = this.V2RomCnName.Replace(":", "_").Replace("/", "").Replace(@"\", "").Replace("|", "").Replace("*", "").Replace("<", "(").Replace(">", ")").Replace("?", "_").Replace(@"""", "_");
+            this.V2RomCnName = this.V2RomCnName.Replace(":", "_").Replace("/", "").Replace(@"\", "").Replace("|", "").Replace("*", "").Replace("<", "(").Replace(">", ")").Replace("?", "_").Replace(@"""", "_").Replace("&", "_");
         }
 
         /// <summary>
