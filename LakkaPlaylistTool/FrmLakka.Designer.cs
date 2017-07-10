@@ -34,6 +34,7 @@
             this.btnLoadRomDir = new System.Windows.Forms.Button();
             this.btnRetroImageDir = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.cbxCopyRoms = new System.Windows.Forms.CheckBox();
             this.btnLoadLakkaList = new System.Windows.Forms.Button();
             this.txtLakkaRom = new System.Windows.Forms.TextBox();
             this.txtRetroImage = new System.Windows.Forms.TextBox();
@@ -45,7 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cbxCopyRoms = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -64,9 +65,9 @@
             // btnLoadRomDir
             // 
             this.btnLoadRomDir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLoadRomDir.Location = new System.Drawing.Point(3, 173);
+            this.btnLoadRomDir.Location = new System.Drawing.Point(3, 157);
             this.btnLoadRomDir.Name = "btnLoadRomDir";
-            this.btnLoadRomDir.Size = new System.Drawing.Size(264, 79);
+            this.btnLoadRomDir.Size = new System.Drawing.Size(250, 71);
             this.btnLoadRomDir.TabIndex = 2;
             this.btnLoadRomDir.Text = "3. 选择游戏ROM目录";
             this.btnLoadRomDir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -77,9 +78,9 @@
             // btnRetroImageDir
             // 
             this.btnRetroImageDir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRetroImageDir.Location = new System.Drawing.Point(3, 88);
+            this.btnRetroImageDir.Location = new System.Drawing.Point(3, 80);
             this.btnRetroImageDir.Name = "btnRetroImageDir";
-            this.btnRetroImageDir.Size = new System.Drawing.Size(264, 79);
+            this.btnRetroImageDir.Size = new System.Drawing.Size(250, 71);
             this.btnRetroImageDir.TabIndex = 10;
             this.btnRetroImageDir.Text = "2. 选择图片目录";
             this.btnRetroImageDir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -89,147 +90,17 @@
             // 
             // btnEdit
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.btnEdit, 2);
             this.btnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnEdit.Location = new System.Drawing.Point(3, 258);
+            this.btnEdit.Location = new System.Drawing.Point(3, 234);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(264, 79);
+            this.btnEdit.Size = new System.Drawing.Size(501, 71);
             this.btnEdit.TabIndex = 6;
             this.btnEdit.Text = "4. 编辑Lakka列表";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTip1.SetToolTip(this.btnEdit, "如果选择了Retro图片目录，那么生成列表的同时会在相同目录下生成图片目录");
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnLoadLakkaList
-            // 
-            this.btnLoadLakkaList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLoadLakkaList.Location = new System.Drawing.Point(3, 3);
-            this.btnLoadLakkaList.Name = "btnLoadLakkaList";
-            this.btnLoadLakkaList.Size = new System.Drawing.Size(264, 79);
-            this.btnLoadLakkaList.TabIndex = 0;
-            this.btnLoadLakkaList.Text = "1. 加载Lakka列表文件(lpl文件)";
-            this.btnLoadLakkaList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoadLakkaList.UseVisualStyleBackColor = true;
-            this.btnLoadLakkaList.Click += new System.EventHandler(this.btnLoadLakkaList_Click);
-            // 
-            // txtLakkaRom
-            // 
-            this.txtLakkaRom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLakkaRom.Location = new System.Drawing.Point(273, 173);
-            this.txtLakkaRom.Multiline = true;
-            this.txtLakkaRom.Name = "txtLakkaRom";
-            this.txtLakkaRom.ReadOnly = true;
-            this.txtLakkaRom.Size = new System.Drawing.Size(260, 79);
-            this.txtLakkaRom.TabIndex = 3;
-            // 
-            // txtRetroImage
-            // 
-            this.txtRetroImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRetroImage.Location = new System.Drawing.Point(273, 88);
-            this.txtRetroImage.Multiline = true;
-            this.txtRetroImage.Name = "txtRetroImage";
-            this.txtRetroImage.ReadOnly = true;
-            this.txtRetroImage.Size = new System.Drawing.Size(260, 79);
-            this.txtRetroImage.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
-            this.label1.Location = new System.Drawing.Point(3, 340);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(182, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "编辑Lakka游戏列表和图片";
-            // 
-            // txtLakkaList
-            // 
-            this.txtLakkaList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLakkaList.Location = new System.Drawing.Point(273, 3);
-            this.txtLakkaList.Multiline = true;
-            this.txtLakkaList.Name = "txtLakkaList";
-            this.txtLakkaList.ReadOnly = true;
-            this.txtLakkaList.Size = new System.Drawing.Size(260, 79);
-            this.txtLakkaList.TabIndex = 1;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.4604F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.53959F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.Controls.Add(this.label4, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtLakkaList, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnLoadLakkaList, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnEdit, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtRetroImage, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtLakkaRom, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnRetroImageDir, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnLoadRomDir, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnSave, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 2, 3);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(629, 360);
-            this.tableLayoutPanel1.TabIndex = 12;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(539, 170);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 15);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "*必选";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(539, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 15);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "*必选";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(539, 85);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 15);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "可选";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSave.Location = new System.Drawing.Point(273, 258);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(260, 79);
-            this.btnSave.TabIndex = 16;
-            this.btnSave.Text = "5. 保存";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.cbxCrc32);
-            this.flowLayoutPanel1.Controls.Add(this.cbxCopyRoms);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(539, 258);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(87, 79);
-            this.flowLayoutPanel1.TabIndex = 17;
             // 
             // cbxCopyRoms
             // 
@@ -242,11 +113,156 @@
             this.toolTip1.SetToolTip(this.cbxCopyRoms, "重新拷贝整理后的ROM,如果对ROM有删减，可以重新拷贝一个干净的ROM目录");
             this.cbxCopyRoms.UseVisualStyleBackColor = true;
             // 
+            // btnLoadLakkaList
+            // 
+            this.btnLoadLakkaList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLoadLakkaList.Location = new System.Drawing.Point(3, 3);
+            this.btnLoadLakkaList.Name = "btnLoadLakkaList";
+            this.btnLoadLakkaList.Size = new System.Drawing.Size(250, 71);
+            this.btnLoadLakkaList.TabIndex = 0;
+            this.btnLoadLakkaList.Text = "1. 加载Lakka列表文件(lpl文件)";
+            this.btnLoadLakkaList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoadLakkaList.UseVisualStyleBackColor = true;
+            this.btnLoadLakkaList.Click += new System.EventHandler(this.btnLoadLakkaList_Click);
+            // 
+            // txtLakkaRom
+            // 
+            this.txtLakkaRom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLakkaRom.Location = new System.Drawing.Point(259, 157);
+            this.txtLakkaRom.Multiline = true;
+            this.txtLakkaRom.Name = "txtLakkaRom";
+            this.txtLakkaRom.ReadOnly = true;
+            this.txtLakkaRom.Size = new System.Drawing.Size(245, 71);
+            this.txtLakkaRom.TabIndex = 3;
+            // 
+            // txtRetroImage
+            // 
+            this.txtRetroImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRetroImage.Location = new System.Drawing.Point(259, 80);
+            this.txtRetroImage.Multiline = true;
+            this.txtRetroImage.Name = "txtRetroImage";
+            this.txtRetroImage.ReadOnly = true;
+            this.txtRetroImage.Size = new System.Drawing.Size(245, 71);
+            this.txtRetroImage.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
+            this.label1.Location = new System.Drawing.Point(3, 385);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(182, 15);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "编辑Lakka游戏列表和图片";
+            // 
+            // txtLakkaList
+            // 
+            this.txtLakkaList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLakkaList.Location = new System.Drawing.Point(259, 3);
+            this.txtLakkaList.Multiline = true;
+            this.txtLakkaList.Name = "txtLakkaList";
+            this.txtLakkaList.ReadOnly = true;
+            this.txtLakkaList.Size = new System.Drawing.Size(245, 71);
+            this.txtLakkaList.TabIndex = 1;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.46041F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.53959F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122F));
+            this.tableLayoutPanel1.Controls.Add(this.label4, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtLakkaList, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnLoadLakkaList, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnEdit, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtRetroImage, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtLakkaRom, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnRetroImageDir, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnLoadRomDir, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.btnSave, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 3);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(630, 405);
+            this.tableLayoutPanel1.TabIndex = 12;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(510, 154);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 15);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "*必选";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(510, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 15);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "*必选";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(510, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 15);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "可选";
+            // 
+            // btnSave
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.btnSave, 2);
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSave.Location = new System.Drawing.Point(3, 311);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(501, 71);
+            this.btnSave.TabIndex = 16;
+            this.btnSave.Text = "5. 保存";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.cbxCrc32);
+            this.flowLayoutPanel1.Controls.Add(this.cbxCopyRoms);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(510, 311);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(117, 71);
+            this.flowLayoutPanel1.TabIndex = 17;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(510, 231);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 15);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "可选";
+            // 
             // FrmLakka
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 360);
+            this.ClientSize = new System.Drawing.Size(630, 405);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmLakka";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -279,6 +295,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox cbxCopyRoms;
+        private System.Windows.Forms.Label label5;
     }
 }
 
