@@ -294,6 +294,19 @@ namespace LakkaPlaylistTool
             sortedList.AddRange(m_games.Values);
             sortedList.Sort();
 
+            //使用FBA中文名
+            if (this.cbxUseFbaCnName.Checked)
+            {
+                Dictionary<string, string> dic = Utils.getFBA_res();
+                foreach(GameItem item in sortedList)
+                {
+                    if (dic.ContainsKey(item.getRomShortFileNameWithOutExtension()))
+                    {
+                        item.V2RomCnName = dic[item.getRomShortFileNameWithOutExtension()];
+                    }
+                }
+            }
+
             readImageBitToMem(sortedList);
 
             FrmEditRoms frm = new FrmEditRoms();
