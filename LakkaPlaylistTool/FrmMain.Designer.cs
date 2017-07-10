@@ -38,9 +38,9 @@
             // 
             // btnLakka
             // 
-            this.btnLakka.Location = new System.Drawing.Point(40, 17);
+            this.btnLakka.Location = new System.Drawing.Point(40, 19);
             this.btnLakka.Name = "btnLakka";
-            this.btnLakka.Size = new System.Drawing.Size(383, 54);
+            this.btnLakka.Size = new System.Drawing.Size(348, 54);
             this.btnLakka.TabIndex = 0;
             this.btnLakka.Text = "1. 编辑Lakka列表";
             this.btnLakka.UseVisualStyleBackColor = true;
@@ -48,21 +48,21 @@
             // 
             // btnRetro
             // 
-            this.btnRetro.Location = new System.Drawing.Point(40, 89);
+            this.btnRetro.Location = new System.Drawing.Point(40, 161);
             this.btnRetro.Name = "btnRetro";
-            this.btnRetro.Size = new System.Drawing.Size(383, 54);
+            this.btnRetro.Size = new System.Drawing.Size(348, 54);
             this.btnRetro.TabIndex = 1;
-            this.btnRetro.Text = "2. 转换Retro列表为Lakka格式";
+            this.btnRetro.Text = "3. 转换Retro列表为Lakka格式";
             this.btnRetro.UseVisualStyleBackColor = true;
             this.btnRetro.Click += new System.EventHandler(this.btnRetro_Click);
             // 
             // btnGenerateLakka
             // 
-            this.btnGenerateLakka.Location = new System.Drawing.Point(40, 163);
+            this.btnGenerateLakka.Location = new System.Drawing.Point(40, 90);
             this.btnGenerateLakka.Name = "btnGenerateLakka";
-            this.btnGenerateLakka.Size = new System.Drawing.Size(383, 54);
+            this.btnGenerateLakka.Size = new System.Drawing.Size(348, 54);
             this.btnGenerateLakka.TabIndex = 2;
-            this.btnGenerateLakka.Text = "3. 根据ROM目录生成Lakka列表";
+            this.btnGenerateLakka.Text = "2. 根据ROM目录生成Lakka列表";
             this.btnGenerateLakka.UseVisualStyleBackColor = true;
             this.btnGenerateLakka.Click += new System.EventHandler(this.btnGenerateLakka_Click);
             // 
@@ -70,7 +70,7 @@
             // 
             this.btnLakka2Retro.Location = new System.Drawing.Point(40, 232);
             this.btnLakka2Retro.Name = "btnLakka2Retro";
-            this.btnLakka2Retro.Size = new System.Drawing.Size(383, 54);
+            this.btnLakka2Retro.Size = new System.Drawing.Size(348, 54);
             this.btnLakka2Retro.TabIndex = 3;
             this.btnLakka2Retro.Text = "4. 转换Lakka列表为Retro格式";
             this.btnLakka2Retro.UseVisualStyleBackColor = true;
@@ -82,9 +82,9 @@
             this.groupBox1.Controls.Add(this.btnGenerateLakka);
             this.groupBox1.Controls.Add(this.btnRetro);
             this.groupBox1.Controls.Add(this.btnLakka);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(28, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(461, 294);
+            this.groupBox1.Size = new System.Drawing.Size(419, 294);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "功能列表";
