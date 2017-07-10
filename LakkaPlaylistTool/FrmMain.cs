@@ -80,7 +80,7 @@ namespace LakkaPlaylistTool
                     item.V4EmuType = "DETECT_TYPE";
                     item.V5Crc32 = "DETECT";
                     item.V6pListName = "PLAY_LIST_FILE_NAME";
-                    item.handleSpecialChars();
+                    item.removeUnSupportedFileChar();
                     games.Add(item.V1RomFullFileName, item);
                 }
 
@@ -138,7 +138,7 @@ namespace LakkaPlaylistTool
                 item.V4EmuType = "DETECT_TYPE";
                 item.V5Crc32 = "DETECT";
                 item.V6pListName = "PLAY_LIST_FILE_NAME";
-                item.handleSpecialChars();
+                item.removeUnSupportedFileChar();
                 //if (xe.SelectSingleNode("image") != null)
                 //{
                 //    item.image = xe.SelectSingleNode("image").InnerText.Trim().Split('/').Last<string>();

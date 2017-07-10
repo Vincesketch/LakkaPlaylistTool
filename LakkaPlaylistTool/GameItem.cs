@@ -43,7 +43,7 @@ namespace LakkaPlaylistTool
         /// </summary>
         public String V5Crc32 { get; set; }
         /// <summary>
-        /// 游戏列表文件的文件名
+        /// 游戏列表文件 的文件名
         /// </summary>
         public String V6pListName { get; set; }
 
@@ -53,28 +53,38 @@ namespace LakkaPlaylistTool
         /// </summary>
         public String imageFullName;
 
-        public void handleSpecialChars()
+        /// <summary>
+        /// 去除Windows平台上不支持的文件名
+        /// </summary>
+        public void removeUnSupportedFileChar()
         {
             this.V2RomCnName = this.V2RomCnName.Replace(":", "_").Replace("/", "").Replace(@"\", "").Replace("|", "").Replace("*", "").Replace("<", "(").Replace(">", ")").Replace("?", "_").Replace(@"""", "_").Replace("&", "_");
         }
 
         /// <summary>
-        /// ROM短文件名 wolf.zip
+        /// ROM短文件名带后缀
         /// </summary>
+        /// <example>wolf.zip</example>
         /// <returns></returns>
         public string getRomShortFileNameWithExtension()
         {
             return V1RomFullFileName.Split('/').Last().Split('\\').Last();
         }
         /// <summary>
-        /// ROM短文件名 wolf
+        /// ROM短文件名不带后缀
         /// </summary>
+        /// <example>wolf</example>
         /// <returns></returns>
         public string getRomShortFileNameWithOutExtension()
         {
             return V1RomFullFileName.Split('/').Last().Split('\\').Last().Split('.').First();
         }
 
+        /// <summary>
+        /// For sorting method
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public int CompareTo(GameItem obj)
         {
             int result;

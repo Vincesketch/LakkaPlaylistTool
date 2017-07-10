@@ -51,7 +51,7 @@
             // 
             this.cbxCrc32.AutoSize = true;
             this.cbxCrc32.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.cbxCrc32.Location = new System.Drawing.Point(541, 258);
+            this.cbxCrc32.Location = new System.Drawing.Point(540, 258);
             this.cbxCrc32.Name = "cbxCrc32";
             this.cbxCrc32.Size = new System.Drawing.Size(81, 36);
             this.cbxCrc32.TabIndex = 12;
@@ -117,7 +117,7 @@
             this.txtLakkaRom.Multiline = true;
             this.txtLakkaRom.Name = "txtLakkaRom";
             this.txtLakkaRom.ReadOnly = true;
-            this.txtLakkaRom.Size = new System.Drawing.Size(261, 79);
+            this.txtLakkaRom.Size = new System.Drawing.Size(260, 79);
             this.txtLakkaRom.TabIndex = 3;
             // 
             // txtRetroImage
@@ -127,7 +127,7 @@
             this.txtRetroImage.Multiline = true;
             this.txtRetroImage.Name = "txtRetroImage";
             this.txtRetroImage.ReadOnly = true;
-            this.txtRetroImage.Size = new System.Drawing.Size(261, 79);
+            this.txtRetroImage.Size = new System.Drawing.Size(260, 79);
             this.txtRetroImage.TabIndex = 11;
             // 
             // label1
@@ -147,7 +147,7 @@
             this.txtLakkaList.Multiline = true;
             this.txtLakkaList.Name = "txtLakkaList";
             this.txtLakkaList.ReadOnly = true;
-            this.txtLakkaList.Size = new System.Drawing.Size(261, 79);
+            this.txtLakkaList.Size = new System.Drawing.Size(260, 79);
             this.txtLakkaList.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -155,7 +155,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.46041F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.5396F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtLakkaList, 1, 0);
@@ -185,7 +185,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(541, 170);
+            this.label4.Location = new System.Drawing.Point(540, 170);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 15);
             this.label4.TabIndex = 15;
@@ -194,7 +194,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(541, 0);
+            this.label3.Location = new System.Drawing.Point(540, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 15);
             this.label3.TabIndex = 14;
@@ -203,7 +203,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(541, 85);
+            this.label2.Location = new System.Drawing.Point(540, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 15);
             this.label2.TabIndex = 13;
@@ -214,7 +214,7 @@
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSave.Location = new System.Drawing.Point(274, 258);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(261, 79);
+            this.btnSave.Size = new System.Drawing.Size(260, 79);
             this.btnSave.TabIndex = 16;
             this.btnSave.Text = "5. 保存";
             this.btnSave.UseVisualStyleBackColor = true;

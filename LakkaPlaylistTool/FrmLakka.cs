@@ -107,7 +107,7 @@ namespace LakkaPlaylistTool
                 item.V5Crc32 = readLine(reader);
                 item.V6pListName = readLine(reader);
 
-                item.handleSpecialChars();
+                item.removeUnSupportedFileChar();
             }
             reader.Close();
             return games;
