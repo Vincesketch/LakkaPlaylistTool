@@ -207,24 +207,27 @@ namespace LakkaPlaylistTool
             fs.Close();
 
             // 重新拷贝ROM
-            FileInfo fi1 = new FileInfo(newFileName);
-            string newRomDir = fi1.DirectoryName + "\\" + fi1.Name + "_ROM";
-            Directory.CreateDirectory(newRomDir);
-            foreach (GameItem item in games)
+            if (this.cbxCopyRoms.Checked)
             {
-                FileInfo fi = m_roms[item.getRomShortFileNameWithOutExtension()];
-                string newRomName = newRomDir + "\\" + item.getRomShortFileNameWithOutExtension() + fi.Extension;
-                try
+                FileInfo fi1 = new FileInfo(newFileName);
+                string newRomDir = fi1.DirectoryName + "\\" + fi1.Name + "_ROM";
+                Directory.CreateDirectory(newRomDir);
+                foreach (GameItem item in games)
                 {
-                    // 对每一个rom
-                    if (!File.Exists(newRomName))
+                    FileInfo fi = m_roms[item.getRomShortFileNameWithOutExtension()];
+                    string newRomName = newRomDir + "\\" + item.getRomShortFileNameWithOutExtension() + fi.Extension;
+                    try
                     {
-                        fi.CopyTo(newRomName);
+                        // 对每一个rom
+                        if (!File.Exists(newRomName))
+                        {
+                            fi.CopyTo(newRomName);
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    this.label1.Text += ex.Message;
+                    catch (Exception ex)
+                    {
+                        this.label1.Text += ex.Message;
+                    }
                 }
             }
 
