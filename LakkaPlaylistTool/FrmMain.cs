@@ -189,7 +189,9 @@ namespace LakkaPlaylistTool
                         imgNode.InnerText = item.V2RomCnName + ".png";
                         gameNode.AppendChild(imgNode);
 
-                        
+                        XmlNode vdoNode = xmlDoc.CreateElement("video");
+                        vdoNode.InnerText = item.getRomShortFileNameWithOutExtension() + ".mp4";
+                        gameNode.AppendChild(vdoNode);
                     }
                     xmlDoc.InsertBefore(Declaration, xmlDoc.DocumentElement);
                     xmlDoc.Save(newRetroFileName);
