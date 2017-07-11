@@ -14,110 +14,80 @@ namespace LakkaPlaylistTool
             InitializeComponent();
         }
 
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLakka_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 编辑Lakka列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLakkaEdit_Click(object sender, EventArgs e)
         {
             Form frm = new FrmLakka();
             frm.ShowDialog(this);
             frm.Dispose();
         }
 
+        /// <summary>
+        /// 根据ROM目录生成Lakka列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateLakka_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                dialog.Description = "请选择 游戏ROM所在的文件夹";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    DirectoryInfo di = new DirectoryInfo(dialog.SelectedPath);
+                    FileInfo[] files = di.GetFiles();
+                    Dictionary<string, GameItem> games = new Dictionary<string, GameItem>();
+                    foreach (FileInfo fi in files)
+                    {
+                        GameItem item = new GameItem();
+                        item.V1RomFullFileName = fi.FullName;
+                        item.V2RomCnName = item.getRomShortFileNameWithOutExtension();
+                        item.V3coreBinaryPath = "DETECT_CORE";
+                        item.V4EmuType = "DETECT_TYPE";
+                        item.V5Crc32 = "DETECT";
+                        item.V6pListName = "PLAY_LIST_FILE_NAME";
+                        item.removeUnSupportedFileChar();
+                        games.Add(item.V1RomFullFileName, item);
+                    }
+
+                    using (SaveFileDialog fileDialog = new SaveFileDialog())
+                    {
+                        fileDialog.Title = "保存Lakka游戏列表文件";
+                        fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
+                        if (fileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            //排序
+                            List<GameItem> sortedList = new List<GameItem>();
+                            sortedList.AddRange(games.Values);
+                            sortedList.Sort();
+
+                            FileStream fs = File.Create(fileDialog.FileName);
+                            foreach (GameItem item in sortedList)
+                            {
+                                Utils.WriteStrToFile(fs, item.V1RomFullFileName);
+                                Utils.WriteStrToFile(fs, item.V2RomCnName);
+                                Utils.WriteStrToFile(fs, item.V3coreBinaryPath);
+                                Utils.WriteStrToFile(fs, item.V4EmuType);
+                                Utils.WriteStrToFile(fs, item.V5Crc32);
+                                Utils.WriteStrToFile(fs, item.V6pListName);
+                            }
+                            fs.Flush();
+                            fs.Close();
+                            MessageBox.Show("成功转换<" + games.Count.ToString() + ">个游戏");
+                        }
+                    }
+                }
+            }
+        }
+
         private void btnRetro_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.Title = "请选择Retro游戏列表文件";
-            fileDialog.Filter = "所有文件(*.xml)|*.xml";
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                foreach (string file in fileDialog.FileNames)
-                {
-                    // Read into memory
-                    Dictionary<string, GameItem> games = readRetroGames(file);
 
-                    FileInfo fi = new FileInfo(file);
-                    string newLakkaFileName = fi.DirectoryName + "\\" + fi.Name.Split('.').First() + ".lpl";
-
-                    FileStream fs = File.Create(newLakkaFileName);
-                    foreach (GameItem item in games.Values)
-                    {
-                        writeStrToFile(fs, item.V1RomFullFileName);
-                        writeStrToFile(fs, item.V2RomCnName);
-                        writeStrToFile(fs, item.V3coreBinaryPath);
-                        writeStrToFile(fs, item.V4EmuType);
-                        writeStrToFile(fs, item.V5Crc32);
-                        writeStrToFile(fs, item.V6pListName);
-                    }
-                    fs.Flush();
-                    fs.Close();
-                    MessageBox.Show("成功转换<" + games.Count.ToString() + ">个游戏");
-                }
-
-            }
-        }
-
-        private void btnGenerateLakka_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = "请选择Lakka ROM文件夹路径";
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                string foldPath = dialog.SelectedPath;
-                DirectoryInfo di = new DirectoryInfo(foldPath);
-                FileInfo[] files = di.GetFiles();//di.GetFiles("*.zip");
-                Dictionary<string, GameItem> games = new Dictionary<string, GameItem>();
-                foreach (FileInfo fi in files)
-                {
-                    GameItem item = new GameItem();
-                    item.V1RomFullFileName = fi.FullName;
-                    item.V2RomCnName = item.getRomShortFileNameWithOutExtension();
-                    item.V3coreBinaryPath = "DETECT_CORE";
-                    item.V4EmuType = "DETECT_TYPE";
-                    item.V5Crc32 = "DETECT";
-                    item.V6pListName = "PLAY_LIST_FILE_NAME";
-                    item.removeUnSupportedFileChar();
-                    games.Add(item.V1RomFullFileName, item);
-                }
-
-                SaveFileDialog fileDialog = new SaveFileDialog();
-                fileDialog.Title = "保存Lakka游戏列表文件";
-                fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
-                if (fileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    //排序
-                    List<GameItem> sortedList = new List<GameItem>();
-                    sortedList.AddRange(games.Values);
-                    sortedList.Sort();
-
-                    FileStream fs = File.Create(fileDialog.FileName);
-                    foreach (GameItem item in sortedList)
-                    {
-                        writeStrToFile(fs, item.V1RomFullFileName);
-                        writeStrToFile(fs, item.V2RomCnName);
-                        writeStrToFile(fs, item.V3coreBinaryPath);
-                        writeStrToFile(fs, item.V4EmuType);
-                        writeStrToFile(fs, item.V5Crc32);
-                        writeStrToFile(fs, item.V6pListName);
-                    }
-                    fs.Flush();
-                    fs.Close();
-                    MessageBox.Show("成功转换<" + games.Count.ToString() + ">个游戏");
-                }
-            }
-        }
-
-        private void writeStrToFile(FileStream fStream, string str)
-        {
-            byte[] data1 = System.Text.Encoding.UTF8.GetBytes(str);
-            fStream.Write(data1, 0, data1.Length);
-
-            byte[] data7 = System.Text.Encoding.UTF8.GetBytes("\r\n");
-            fStream.Write(data7, 0, data7.Length);
         }
 
         private Dictionary<string, GameItem> readRetroGames(string filePath)
@@ -139,19 +109,58 @@ namespace LakkaPlaylistTool
                 item.V5Crc32 = "DETECT";
                 item.V6pListName = "PLAY_LIST_FILE_NAME";
                 item.removeUnSupportedFileChar();
-                //if (xe.SelectSingleNode("image") != null)
-                //{
-                //    item.image = xe.SelectSingleNode("image").InnerText.Trim().Split('/').Last<string>();
-                //}
-                //if (item.image.Length == 0)
-                //{
-                //    item.image = item.a2RomCnName;
-                //}
                 games.Add(item.V1RomFullFileName, item);
             }
             return games;
         }
 
+        /// <summary>
+        /// 转换Retro列表为Lakka格式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRetro2Lakka_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Multiselect = false;
+                fileDialog.Title = "请选择Retro游戏列表文件";
+                fileDialog.Filter = "所有文件(*.xml)|*.xml";
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string file = fileDialog.FileName;
+
+                    // Read into memory
+                    Dictionary<string, GameItem> games = readRetroGames(file);
+
+                    // Construct lpl file Name
+                    FileInfo fi = new FileInfo(file);
+                    string newLakkaFileName = fi.DirectoryName + "\\" + fi.Name.Split('.').First() + ".lpl";
+
+                    // Create lakka list file
+                    FileStream fs = File.Create(newLakkaFileName);
+                    foreach (GameItem item in games.Values)
+                    {
+                        Utils.WriteStrToFile(fs, item.V1RomFullFileName);
+                        Utils.WriteStrToFile(fs, item.V2RomCnName);
+                        Utils.WriteStrToFile(fs, item.V3coreBinaryPath);
+                        Utils.WriteStrToFile(fs, item.V4EmuType);
+                        Utils.WriteStrToFile(fs, item.V5Crc32);
+                        Utils.WriteStrToFile(fs, item.V6pListName);
+                    }
+                    fs.Flush();
+                    fs.Close();
+                    MessageBox.Show("成功转换 <" + games.Count.ToString() + "> 个ROM");
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// 转换Lakka列表为Retro格式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLakka2Retro_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -160,45 +169,45 @@ namespace LakkaPlaylistTool
             fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                foreach (string file in fileDialog.FileNames)
+                string file = fileDialog.FileName;
+
+                // Read into memory
+                FrmLakka frm = new FrmLakka();
+                Dictionary<string, GameItem> games = frm.readLakkaGames(file);
+
+                FileInfo fi = new FileInfo(file);
+                string newRetroFileName = fi.DirectoryName + "\\" + fi.Name.Split('.').First() + ".xml";
+                XmlDocument xmlDoc = new XmlDocument();
+                XmlDeclaration Declaration = xmlDoc.CreateXmlDeclaration("1.0", "utf-8", null);
+                XmlNode rootNode = xmlDoc.CreateElement("gameList");
+                xmlDoc.AppendChild(rootNode);
+                foreach (GameItem item in games.Values)
                 {
-                    // Read into memory
-                    FrmLakka frm = new FrmLakka();
-                    Dictionary<string, GameItem> games = frm.readLakkaGames(file);
+                    XmlNode gameNode = xmlDoc.CreateElement("game");
+                    rootNode.AppendChild(gameNode);
 
-                    FileInfo fi = new FileInfo(file);
-                    string newRetroFileName = fi.DirectoryName + "\\" + fi.Name.Split('.').First() + ".xml";
-                    XmlDocument xmlDoc = new XmlDocument();
-                    XmlDeclaration Declaration = xmlDoc.CreateXmlDeclaration("1.0", "utf-8", null);
-                    XmlNode rootNode = xmlDoc.CreateElement("gameList");
-                    xmlDoc.AppendChild(rootNode);
-                    foreach (GameItem item in games.Values)
-                    {
-                        XmlNode gameNode = xmlDoc.CreateElement("game");
-                        rootNode.AppendChild(gameNode);
+                    XmlNode pathNode = xmlDoc.CreateElement("path");
+                    pathNode.InnerText = item.V1RomFullFileName;
+                    gameNode.AppendChild(pathNode);
 
-                        XmlNode pathNode = xmlDoc.CreateElement("path");
-                        pathNode.InnerText = item.V1RomFullFileName;
-                        gameNode.AppendChild(pathNode);
+                    XmlNode nameNode = xmlDoc.CreateElement("name");
+                    nameNode.InnerText = item.V2RomCnName;
+                    gameNode.AppendChild(nameNode);
 
-                        XmlNode nameNode = xmlDoc.CreateElement("name");
-                        nameNode.InnerText = item.V2RomCnName;
-                        gameNode.AppendChild(nameNode);
+                    XmlNode imgNode = xmlDoc.CreateElement("image");
+                    imgNode.InnerText = item.V2RomCnName + ".png";
+                    gameNode.AppendChild(imgNode);
 
-                        XmlNode imgNode = xmlDoc.CreateElement("image");
-                        imgNode.InnerText = item.V2RomCnName + ".png";
-                        gameNode.AppendChild(imgNode);
-
-                        XmlNode vdoNode = xmlDoc.CreateElement("video");
-                        vdoNode.InnerText = item.getRomShortFileNameWithOutExtension() + ".mp4";
-                        gameNode.AppendChild(vdoNode);
-                    }
-                    xmlDoc.InsertBefore(Declaration, xmlDoc.DocumentElement);
-                    xmlDoc.Save(newRetroFileName);
-                    MessageBox.Show("成功转换<" + games.Count.ToString() + ">个游戏到文件<" + newRetroFileName + ">中。");
+                    XmlNode vdoNode = xmlDoc.CreateElement("video");
+                    vdoNode.InnerText = item.getRomShortFileNameWithOutExtension() + ".mp4";
+                    gameNode.AppendChild(vdoNode);
                 }
-
+                xmlDoc.InsertBefore(Declaration, xmlDoc.DocumentElement);
+                xmlDoc.Save(newRetroFileName);
+                MessageBox.Show("成功转换 <" + games.Count.ToString() + "> 个游戏到文件<" + newRetroFileName + ">中。");
             }
         }
+
+
     }
 }

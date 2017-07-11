@@ -87,23 +87,7 @@ namespace LakkaPlaylistTool
         /// <returns></returns>
         public int CompareTo(GameItem obj)
         {
-            int result;
-            if (this.V2RomCnName == obj.V2RomCnName)
-            {
-                result = 0;
-            }
-            else
-            {
-                if (this.V2RomCnName.CompareTo(obj.V2RomCnName) > 0)
-                {
-                    result = 1;
-                }
-                else
-                {
-                    result = -1;
-                }
-            }
-            return result;
+            return this.V2RomCnName.CompareTo(obj.V2RomCnName);
         }
 
     }
