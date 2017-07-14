@@ -135,7 +135,7 @@ namespace LakkaPlaylistTool
 
                     // Construct lpl file Name
                     FileInfo fi = new FileInfo(file);
-                    string newLakkaFileName = fi.DirectoryName + "\\" + fi.Name.Split('.').First() + ".lpl";
+                    string newLakkaFileName = fi.DirectoryName + "\\" + Utils.GetFileNameWithOutExtention(fi) + ".lpl";
 
                     // Create lakka list file
                     FileStream fs = File.Create(newLakkaFileName);
@@ -176,7 +176,7 @@ namespace LakkaPlaylistTool
                 Dictionary<string, GameItem> games = frm.readLakkaGames(file);
 
                 FileInfo fi = new FileInfo(file);
-                string newRetroFileName = fi.DirectoryName + "\\" + fi.Name.Split('.').First() + ".xml";
+                string newRetroFileName = fi.DirectoryName + "\\" + Utils.GetFileNameWithOutExtention(fi) + ".xml";
                 XmlDocument xmlDoc = new XmlDocument();
                 XmlDeclaration Declaration = xmlDoc.CreateXmlDeclaration("1.0", "utf-8", null);
                 XmlNode rootNode = xmlDoc.CreateElement("gameList");

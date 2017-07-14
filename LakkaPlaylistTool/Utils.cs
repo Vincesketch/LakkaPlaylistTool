@@ -38,5 +38,26 @@ namespace LakkaPlaylistTool
             byte[] data2 = System.Text.Encoding.UTF8.GetBytes("\r\n");
             fStream.Write(data2, 0, data2.Length);
         }
+
+        /// <summary>
+        /// Get File Name
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static string GetFileNameWithOutExtention(string file)
+        {
+            FileInfo fi = new FileInfo(file);
+            return fi.Name.Remove(fi.Name.LastIndexOf(fi.Extension));
+        }
+
+        /// <summary>
+        /// Get File Name
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static string GetFileNameWithOutExtention(FileInfo file)
+        {
+            return file.Name.Remove(file.Name.LastIndexOf(file.Extension));
+        }
     }
 }

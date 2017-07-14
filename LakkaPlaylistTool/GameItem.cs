@@ -77,7 +77,7 @@ namespace LakkaPlaylistTool
         /// <returns></returns>
         public string getRomShortFileNameWithOutExtension()
         {
-            return V1RomFullFileName.Split('/').Last().Split('\\').Last().Split('.').First();
+            return Utils.GetFileNameWithOutExtention(this.getRomShortFileNameWithExtension());
         }
 
         /// <summary>

@@ -145,7 +145,7 @@ namespace LakkaPlaylistTool
             FileInfo[] fileList = new DirectoryInfo(dir).GetFiles();
             foreach (FileInfo file in fileList)
             {
-                roms.Add(file.Name.Split('.').First(), file);
+                roms.Add(Utils.GetFileNameWithOutExtention(file), file);
             }
             return roms;
         }
@@ -157,12 +157,12 @@ namespace LakkaPlaylistTool
             FileInfo[] fileList = new DirectoryInfo(dir).GetFiles("*.jpg");
             foreach (FileInfo file in fileList)
             {
-                images.Add(file.Name.Split('.').First(), file);
+                images.Add(Utils.GetFileNameWithOutExtention(file), file);
             }
             fileList = new DirectoryInfo(dir).GetFiles("*.png");
             foreach (FileInfo file in fileList)
             {
-                images.Add(file.Name.Split('.').First(), file);
+                images.Add(Utils.GetFileNameWithOutExtention(file), file);
             }
             return images;
         }
