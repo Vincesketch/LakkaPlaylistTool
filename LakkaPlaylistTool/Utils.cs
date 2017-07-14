@@ -30,6 +30,11 @@ namespace LakkaPlaylistTool
             return dic;
         }
 
+        /// <summary>
+        /// write line to file
+        /// </summary>
+        /// <param name="fStream"></param>
+        /// <param name="str"></param>
         public static void WriteStrToFile(FileStream fStream, string str)
         {
             byte[] data1 = System.Text.Encoding.UTF8.GetBytes(str);
