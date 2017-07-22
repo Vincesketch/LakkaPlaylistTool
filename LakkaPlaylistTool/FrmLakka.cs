@@ -107,7 +107,7 @@ namespace LakkaPlaylistTool
                 item.V5Crc32 = readLine(reader);
                 item.V6pListName = readLine(reader);
 
-                item.handleSpecialChars();
+                item.removeUnSupportedFileChar();
             }
             reader.Close();
             return games;
@@ -145,7 +145,7 @@ namespace LakkaPlaylistTool
             FileInfo[] fileList = new DirectoryInfo(dir).GetFiles();
             foreach (FileInfo file in fileList)
             {
-                roms.Add(file.Name.Split('.').First(), file);
+                roms.Add(Utils.GetFileNameWithOutExtention(file), file);
             }
             return roms;
         }
@@ -157,12 +157,12 @@ namespace LakkaPlaylistTool
             FileInfo[] fileList = new DirectoryInfo(dir).GetFiles("*.jpg");
             foreach (FileInfo file in fileList)
             {
-                images.Add(file.Name.Split('.').First(), file);
+                images.Add(Utils.GetFileNameWithOutExtention(file), file);
             }
             fileList = new DirectoryInfo(dir).GetFiles("*.png");
             foreach (FileInfo file in fileList)
             {
-                images.Add(file.Name.Split('.').First(), file);
+                images.Add(Utils.GetFileNameWithOutExtention(file), file);
             }
             return images;
         }
@@ -207,24 +207,27 @@ namespace LakkaPlaylistTool
             fs.Close();
 
             // 重新拷贝ROM
-            FileInfo fi1 = new FileInfo(newFileName);
-            string newRomDir = fi1.DirectoryName + "\\" + fi1.Name + "_ROM";
-            Directory.CreateDirectory(newRomDir);
-            foreach (GameItem item in games)
+            if (this.cbxCopyRoms.Checked)
             {
-                FileInfo fi = m_roms[item.getRomShortFileNameWithOutExtension()];
-                string newRomName = newRomDir + "\\" + item.getRomShortFileNameWithOutExtension() + fi.Extension;
-                try
+                FileInfo fi1 = new FileInfo(newFileName);
+                string newRomDir = fi1.DirectoryName + "\\" + fi1.Name + "_ROM";
+                Directory.CreateDirectory(newRomDir);
+                foreach (GameItem item in games)
                 {
-                    // 对每一个rom
-                    if (!File.Exists(newRomName))
+                    FileInfo fi = m_roms[item.getRomShortFileNameWithOutExtension()];
+                    string newRomName = newRomDir + "\\" + item.getRomShortFileNameWithOutExtension() + fi.Extension;
+                    try
                     {
-                        fi.CopyTo(newRomName);
+                        // 对每一个rom
+                        if (!File.Exists(newRomName))
+                        {
+                            fi.CopyTo(newRomName);
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    this.label1.Text += ex.Message;
+                    catch (Exception ex)
+                    {
+                        this.label1.Text += ex.Message;
+                    }
                 }
             }
 
@@ -290,6 +293,19 @@ namespace LakkaPlaylistTool
             List<GameItem> sortedList = new List<GameItem>();
             sortedList.AddRange(m_games.Values);
             sortedList.Sort();
+
+            //使用FBA中文名
+            if (this.cbxUseFbaCnName.Checked)
+            {
+                Dictionary<string, string> dic = Utils.getFBA_res();
+                foreach(GameItem item in sortedList)
+                {
+                    if (dic.ContainsKey(item.getRomShortFileNameWithOutExtension()))
+                    {
+                        item.V2RomCnName = dic[item.getRomShortFileNameWithOutExtension()];
+                    }
+                }
+            }
 
             readImageBitToMem(sortedList);
 
