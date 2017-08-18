@@ -201,6 +201,35 @@ namespace LakkaPlaylistTool
                     XmlNode vdoNode = xmlDoc.CreateElement("video");
                     vdoNode.InnerText = item.getRomShortFileNameWithOutExtension() + ".mp4";
                     gameNode.AppendChild(vdoNode);
+
+                    // Other empty attributes
+                    XmlNode dscNode = xmlDoc.CreateElement("desc");
+                    dscNode.InnerText = "";
+                    gameNode.AppendChild(dscNode);
+
+                    XmlNode rtNode = xmlDoc.CreateElement("rating");
+                    rtNode.InnerText = "";
+                    gameNode.AppendChild(rtNode);
+
+                    XmlNode rlsdNode = xmlDoc.CreateElement("releasedate");
+                    rlsdNode.InnerText = "";
+                    gameNode.AppendChild(rlsdNode);
+
+                    XmlNode dvlpdNode = xmlDoc.CreateElement("developer");
+                    dvlpdNode.InnerText = "";
+                    gameNode.AppendChild(dvlpdNode);
+
+                    XmlNode pblsNode = xmlDoc.CreateElement("publisher");
+                    pblsNode.InnerText = "";
+                    gameNode.AppendChild(pblsNode);
+
+                    XmlNode gnrNode = xmlDoc.CreateElement("genre");
+                    gnrNode.InnerText = "";
+                    gameNode.AppendChild(gnrNode);
+
+                    XmlNode plyNode = xmlDoc.CreateElement("players");
+                    plyNode.InnerText = "";
+                    gameNode.AppendChild(plyNode);
                 }
                 xmlDoc.InsertBefore(Declaration, xmlDoc.DocumentElement);
                 xmlDoc.Save(newRetroFileName);
