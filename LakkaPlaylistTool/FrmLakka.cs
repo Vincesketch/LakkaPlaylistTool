@@ -91,7 +91,7 @@ namespace LakkaPlaylistTool
             {
                 GameItem item = new GameItem();
                 item.V1RomFullFileName = readLine(reader);
-                if (item.V1RomFullFileName.Contains("."))
+                if (item.V1RomFullFileName.Contains(".") && !games.ContainsKey(item.V1RomFullFileName))
                 {
                     games.Add(item.V1RomFullFileName, item);
 
