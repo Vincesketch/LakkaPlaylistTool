@@ -237,6 +237,49 @@ namespace LakkaPlaylistTool
             }
         }
 
+        private void btnAddCharToRetroList_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Multiselect = false;
+                fileDialog.Title = "请选择Retro游戏列表文件";
+                fileDialog.Filter = "所有文件(*.xml)|*.xml";
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string file = fileDialog.FileName;
 
+                    // Read into memory
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(file);
+                    XmlNode gameList = doc.SelectSingleNode("gameList");
+                    foreach (XmlNode game in gameList.ChildNodes)
+                    {
+                        GameItem item = new GameItem();
+                        // 将节点转换为元素，便于得到节点的属性值
+                        XmlElement xe = (XmlElement)game;
+                        XmlNode node = xe.SelectSingleNode("name");
+                        node.InnerText = Utils.GetPYChar(node.InnerText.Trim()).ToUpper() + " " + node.InnerText.Trim();
+                    }
+                    
+
+                    using (SaveFileDialog afileDialog = new SaveFileDialog())
+                    {
+                        afileDialog.Title = "请选择新的Retro游戏列表文件";
+                        afileDialog.Filter = "所有文件(*.xml)|*.xml";
+                        if (afileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            doc.Save(afileDialog.FileName);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            // Test Code.
+            //this.Text = Utils.GetPYChar("中国").ToUpper();
+        }
     }
 }

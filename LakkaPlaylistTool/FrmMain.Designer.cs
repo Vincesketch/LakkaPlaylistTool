@@ -33,6 +33,7 @@
             this.btnCreateLakka = new System.Windows.Forms.Button();
             this.btnLakka2Retro = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAddCharToRetroList = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             this.btnRetro2Lakka.Name = "btnRetro2Lakka";
             this.btnRetro2Lakka.Size = new System.Drawing.Size(348, 54);
             this.btnRetro2Lakka.TabIndex = 1;
-            this.btnRetro2Lakka.Text = "3. 转换Retro列表为Lakka格式";
+            this.btnRetro2Lakka.Text = "3. Retro列表转为Lakka格式";
             this.btnRetro2Lakka.UseVisualStyleBackColor = true;
             this.btnRetro2Lakka.Click += new System.EventHandler(this.btnRetro2Lakka_Click);
             // 
@@ -72,34 +73,46 @@
             this.btnLakka2Retro.Name = "btnLakka2Retro";
             this.btnLakka2Retro.Size = new System.Drawing.Size(348, 54);
             this.btnLakka2Retro.TabIndex = 3;
-            this.btnLakka2Retro.Text = "4. 转换Lakka列表为Retro格式";
+            this.btnLakka2Retro.Text = "4. Lakka列表转为Retro格式";
             this.btnLakka2Retro.UseVisualStyleBackColor = true;
             this.btnLakka2Retro.Click += new System.EventHandler(this.btnLakka2Retro_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAddCharToRetroList);
             this.groupBox1.Controls.Add(this.btnLakka2Retro);
             this.groupBox1.Controls.Add(this.btnCreateLakka);
             this.groupBox1.Controls.Add(this.btnRetro2Lakka);
             this.groupBox1.Controls.Add(this.btnLakkaEdit);
             this.groupBox1.Location = new System.Drawing.Point(28, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(419, 294);
+            this.groupBox1.Size = new System.Drawing.Size(412, 358);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "功能列表";
+            // 
+            // btnAddCharToRetroList
+            // 
+            this.btnAddCharToRetroList.Location = new System.Drawing.Point(40, 298);
+            this.btnAddCharToRetroList.Name = "btnAddCharToRetroList";
+            this.btnAddCharToRetroList.Size = new System.Drawing.Size(348, 54);
+            this.btnAddCharToRetroList.TabIndex = 4;
+            this.btnAddCharToRetroList.Text = "5. Retro列表ROM中文名前添加字母";
+            this.btnAddCharToRetroList.UseVisualStyleBackColor = true;
+            this.btnAddCharToRetroList.Click += new System.EventHandler(this.btnAddCharToRetroList_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(475, 318);
+            this.ClientSize = new System.Drawing.Size(470, 382);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lakka游戏列表维护工具";
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -112,5 +125,6 @@
         private System.Windows.Forms.Button btnCreateLakka;
         private System.Windows.Forms.Button btnLakka2Retro;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnAddCharToRetroList;
     }
 }
