@@ -111,7 +111,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Lakka游戏列表维护工具";
+            this.Text = "游戏列表维护工具";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);

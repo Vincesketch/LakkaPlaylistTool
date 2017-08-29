@@ -59,6 +59,7 @@ namespace LakkaPlaylistTool
                     {
                         fileDialog.Title = "保存Lakka游戏列表文件";
                         fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
+                        fileDialog.InitialDirectory = dialog.SelectedPath;
                         if (fileDialog.ShowDialog() == DialogResult.OK)
                         {
                             //排序
@@ -237,6 +238,11 @@ namespace LakkaPlaylistTool
             }
         }
 
+        /// <summary>
+        /// Retro列表中文名称前添加大写字母
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddCharToRetroList_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog fileDialog = new OpenFileDialog())
@@ -282,7 +288,6 @@ namespace LakkaPlaylistTool
         private void FrmMain_Load(object sender, EventArgs e)
         {
             // Test Code.
-            //this.Text = Utils.GetPYChar("fdg").ToUpper();
         }
     }
 }

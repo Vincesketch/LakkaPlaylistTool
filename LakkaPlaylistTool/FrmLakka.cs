@@ -27,6 +27,8 @@ namespace LakkaPlaylistTool
 
         private List<GameItem> m_finallyGames = new List<GameItem>();
 
+        private string m_cacheFileDialogPath = "";
+
 
         public FrmLakka()
         {
@@ -44,9 +46,11 @@ namespace LakkaPlaylistTool
             fileDialog.Multiselect = false;
             fileDialog.Title = "请选择Lakka游戏列表文件";
             fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
+            fileDialog.InitialDirectory = m_cacheFileDialogPath;
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+                m_cacheFileDialogPath = fileDialog.FileName;
                 foreach (string file in fileDialog.FileNames)
                 {
                     this.txtLakkaList.Text = file;
@@ -60,10 +64,12 @@ namespace LakkaPlaylistTool
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "请选择Lakka ROM文件夹路径";
+            dialog.SelectedPath = m_cacheFileDialogPath;
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 string foldPath = dialog.SelectedPath;
+                m_cacheFileDialogPath = foldPath;
                 txtLakkaRom.Text = foldPath;
                 m_roms = readRomToMem(foldPath);
                 this.label1.Text = ("检测到<" + m_roms.Count.ToString() + ">个游戏ROM");
@@ -130,10 +136,12 @@ namespace LakkaPlaylistTool
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "请选择ROM图片文件夹路径";
+            dialog.SelectedPath = m_cacheFileDialogPath;
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 string foldPath = dialog.SelectedPath;
+                m_cacheFileDialogPath = foldPath;
                 txtRetroImage.Text = foldPath;
 
                 m_images = readImgToMem(foldPath);
@@ -332,8 +340,10 @@ namespace LakkaPlaylistTool
             SaveFileDialog fileDialog = new SaveFileDialog();
             fileDialog.Title = "保存Lakka游戏列表文件";
             fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
+            fileDialog.FileName = m_cacheFileDialogPath;
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+                m_cacheFileDialogPath = fileDialog.FileName;
                 count = doAction(this.m_finallyGames, fileDialog.FileName);
 
             }
