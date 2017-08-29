@@ -279,7 +279,7 @@ namespace LakkaPlaylistTool
         private void FrmMain_Load(object sender, EventArgs e)
         {
             // Test Code.
-            //this.Text = Utils.GetPYChar("中国").ToUpper();
+            //this.Text = Utils.GetPYChar("fdg").ToUpper();
         }
     }
 }
