@@ -252,23 +252,26 @@ namespace LakkaPlaylistTool
                     XmlDocument doc = new XmlDocument();
                     doc.Load(file);
                     XmlNode gameList = doc.SelectSingleNode("gameList");
-                    foreach (XmlNode game in gameList.ChildNodes)
+                    if (gameList != null)
                     {
-                        GameItem item = new GameItem();
-                        // 将节点转换为元素，便于得到节点的属性值
-                        XmlElement xe = (XmlElement)game;
-                        XmlNode node = xe.SelectSingleNode("name");
-                        node.InnerText = Utils.AddPYCharToStr(node.InnerText.Trim());
-                    }
-                    
-
-                    using (SaveFileDialog afileDialog = new SaveFileDialog())
-                    {
-                        afileDialog.Title = "请选择新的Retro游戏列表文件";
-                        afileDialog.Filter = "所有文件(*.xml)|*.xml";
-                        if (afileDialog.ShowDialog() == DialogResult.OK)
+                        foreach (XmlNode game in gameList.ChildNodes)
                         {
-                            doc.Save(afileDialog.FileName);
+                            GameItem item = new GameItem();
+                            // 将节点转换为元素，便于得到节点的属性值
+                            XmlElement xe = (XmlElement)game;
+                            XmlNode node = xe.SelectSingleNode("name");
+                            node.InnerText = Utils.AddPYCharToStr(node.InnerText.Trim());
+                        }
+                    }
+
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.InitialDirectory = fileDialog.FileName;
+                        saveFileDialog.Title = "保存新的Retro游戏列表文件";
+                        saveFileDialog.Filter = "所有文件(*.xml)|*.xml";
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            doc.Save(saveFileDialog.FileName);
                         }
                     }
 
