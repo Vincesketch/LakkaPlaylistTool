@@ -258,7 +258,7 @@ namespace LakkaPlaylistTool
                         // 将节点转换为元素，便于得到节点的属性值
                         XmlElement xe = (XmlElement)game;
                         XmlNode node = xe.SelectSingleNode("name");
-                        node.InnerText = Utils.GetPYChar(node.InnerText.Trim()).ToUpper() + " " + node.InnerText.Trim();
+                        node.InnerText = Utils.AddPYCharToStr(node.InnerText.Trim());
                     }
                     
 

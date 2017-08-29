@@ -65,13 +65,18 @@ namespace LakkaPlaylistTool
             return file.Name.Remove(file.Name.LastIndexOf(file.Extension));
         }
 
-        public static string GetPYChar(string c)
+        public static string AddPYCharToStr(string str)
+        {
+            return GetPYChar(str) + " " + str;
+        }
+
+        public static string GetPYChar(string str)
         {
             byte[] array = new byte[2];
-            array = System.Text.Encoding.Default.GetBytes(c);
+            array = System.Text.Encoding.Default.GetBytes(str);
             int i = (short)(array[0] - '\0') * 256 + ((short)(array[1] - '\0'));
 
-            if (i < 0xB0A1) return c.Substring(0, 1);
+            if (i < 0xB0A1) return str.Substring(0, 1);
             if (i < 0xB0C5) return "a";
             if (i < 0xB2C1) return "b";
             if (i < 0xB4EE) return "c";
@@ -95,7 +100,7 @@ namespace LakkaPlaylistTool
             if (i < 0xD1B9) return "x";
             if (i < 0xD4D1) return "y";
             if (i < 0xD7FA) return "z";
-            return c.Substring(0, 1);
+            return str.Substring(0, 1);
         }
     }
 }
