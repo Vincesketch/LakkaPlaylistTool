@@ -166,7 +166,7 @@ namespace LakkaPlaylistTool
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = false;
-            fileDialog.Title = "请选择Retro游戏列表文件";
+            fileDialog.Title = "请选择Lakka游戏列表文件";
             fileDialog.Filter = "所有文件(*.lpl)|*.lpl";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
