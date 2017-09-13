@@ -69,6 +69,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lakka.resx</DependentUpon>
     </Compile>
+    <Compile Include="fc_res\Fc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fc.resx</DependentUpon>
+    </Compile>
     <Compile Include="FileToCRC32.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
@@ -95,6 +100,10 @@
     <EmbeddedResource Include="fba_res\Lakka.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Lakka.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fc_res\Fc.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Fc.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEditRoms.resx">
       <DependentUpon>FrmEditRoms.cs</DependentUpon>
@@ -130,6 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fba_res\gamelist_cn.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fc_res\fc_rom.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

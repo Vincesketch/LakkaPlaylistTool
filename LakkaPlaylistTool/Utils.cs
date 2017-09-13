@@ -31,6 +31,29 @@ namespace LakkaPlaylistTool
         }
 
         /// <summary>
+        /// Get ROM Chinese name from
+        /// http://www.emu618.net/home/fc/allset/web/
+        /// </summary>
+        /// <returns>Key: rom name [Super Gryzor (J)], Value : 魂斗罗2(日) </returns>
+        public static Dictionary<string, string> getFC_res()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+
+            string str = string.Empty;
+            StringReader sr = new StringReader(fc_res.Fc.fc_rom);
+            while (sr.Peek() != -1)
+            {
+                str = sr.ReadLine();
+                string[] arr = str.Split('\t');
+                if (arr.Length > 1 && !dic.ContainsKey(arr[0]))
+                {
+                    dic[arr[0]] = arr[1];
+                }
+            }
+            return dic;
+        }
+
+        /// <summary>
         /// write line to file
         /// </summary>
         /// <param name="fStream"></param>

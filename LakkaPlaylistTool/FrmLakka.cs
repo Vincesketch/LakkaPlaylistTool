@@ -304,15 +304,26 @@ namespace LakkaPlaylistTool
             sortedList.AddRange(m_games.Values);
             sortedList.Sort();
 
+            Dictionary<string, string> translateDic = new Dictionary<string, string>();
             //使用FBA中文名
             if (this.cbxUseFbaCnName.Checked)
             {
-                Dictionary<string, string> dic = Utils.getFBA_res();
-                foreach(GameItem item in sortedList)
+                translateDic = Utils.getFBA_res();
+            }
+            //使用FC中文名
+            if (this.cbxUseFcCnName.Checked)
+            {
+                translateDic = Utils.getFC_res();
+            }
+
+            //翻译ROM名称
+            if (translateDic.Count > 0)
+            {
+                foreach (GameItem item in sortedList)
                 {
-                    if (dic.ContainsKey(item.getRomShortFileNameWithOutExtension()))
+                    if (translateDic.ContainsKey(item.getRomShortFileNameWithOutExtension()))
                     {
-                        item.V2RomCnName = dic[item.getRomShortFileNameWithOutExtension()];
+                        item.V2RomCnName = translateDic[item.getRomShortFileNameWithOutExtension()];
                     }
                 }
             }
