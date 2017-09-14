@@ -99,8 +99,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>md_cn.resx</DependentUpon>
     </Compile>
+    <Compile Include="pce_res\pce_cn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pce_cn.resx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sfc_res\sfc_cn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sfc_cn.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="fba_res\Lakka.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -123,6 +133,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>md_cn.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="pce_res\pce_cn.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>pce_cn.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -133,6 +147,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="sfc_res\sfc_cn.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sfc_cn.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -152,6 +170,8 @@
   <ItemGroup>
     <Content Include="fc_res\fc_rom.txt" />
     <Content Include="md_res\md_rom.txt" />
+    <Content Include="pce_res\pce_rom.txt" />
+    <Content Include="sfc_res\sfc_rom.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

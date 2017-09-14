@@ -320,6 +320,16 @@ namespace LakkaPlaylistTool
             {
                 translateDic = translateDic.Union(Utils.getMD_res()).ToDictionary(key => key.Key, value => value.Value);
             }
+            //使用SFC中文名
+            if (this.cbxUseSfcCnName.Checked)
+            {
+                translateDic = translateDic.Union(Utils.getSFC_res()).ToDictionary(key => key.Key, value => value.Value);
+            }
+            //使用PCE中文名
+            if (this.cbxUsePceCnName.Checked)
+            {
+                translateDic = translateDic.Union(Utils.getPCE_res()).ToDictionary(key => key.Key, value => value.Value);
+            }
 
             //翻译ROM名称
             if (translateDic.Count > 0)

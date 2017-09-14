@@ -44,6 +44,15 @@ namespace LakkaPlaylistTool
             return getTxt_res(md_res.md_cn.md_rom);
         }
 
+        public static Dictionary<string, string> getSFC_res()
+        {
+            return getTxt_res(sfc_res.sfc_cn.sfc_rom);
+        }
+        public static Dictionary<string, string> getPCE_res()
+        {
+            return getTxt_res(pce_res.pce_cn.pce_rom);
+        }
+
         private static Dictionary<string, string> getTxt_res(string text)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
