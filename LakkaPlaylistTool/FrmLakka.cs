@@ -315,6 +315,11 @@ namespace LakkaPlaylistTool
             {
                 translateDic = translateDic.Union(Utils.getFC_res()).ToDictionary(key => key.Key, value => value.Value);
             }
+            //使用MD中文名
+            if (this.cbxUseMdCnName.Checked)
+            {
+                translateDic = translateDic.Union(Utils.getMD_res()).ToDictionary(key => key.Key, value => value.Value);
+            }
 
             //翻译ROM名称
             if (translateDic.Count > 0)

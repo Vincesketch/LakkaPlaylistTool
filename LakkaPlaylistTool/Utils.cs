@@ -37,10 +37,19 @@ namespace LakkaPlaylistTool
         /// <returns>Key: rom name [Super Gryzor (J)], Value : 魂斗罗2(日) </returns>
         public static Dictionary<string, string> getFC_res()
         {
+            return getTxt_res(fc_res.Fc.fc_rom);
+        }
+        public static Dictionary<string, string> getMD_res()
+        {
+            return getTxt_res(md_res.md_cn.md_rom);
+        }
+
+        private static Dictionary<string, string> getTxt_res(string text)
+        {
             Dictionary<string, string> dic = new Dictionary<string, string>();
 
             string str = string.Empty;
-            StringReader sr = new StringReader(fc_res.Fc.fc_rom);
+            StringReader sr = new StringReader(text);
             while (sr.Peek() != -1)
             {
                 str = sr.ReadLine();
