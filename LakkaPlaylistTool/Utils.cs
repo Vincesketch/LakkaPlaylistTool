@@ -20,8 +20,8 @@ namespace LakkaPlaylistTool
             foreach (XmlNode game in gameList)
             {
                 XmlElement xe = (XmlElement)game;
-                string romName = xe.SelectSingleNode("name").InnerText;
-                string romCnName = xe.SelectSingleNode("translation").InnerText;
+                string romName = xe.SelectSingleNode("name").InnerText.Trim();
+                string romCnName = xe.SelectSingleNode("translation").InnerText.Trim();
                 if (romName.Length > 0 && !dic.ContainsKey(romName))
                 {
                     dic[romName] = romCnName;
@@ -45,9 +45,11 @@ namespace LakkaPlaylistTool
             {
                 str = sr.ReadLine();
                 string[] arr = str.Split('\t');
-                if (arr.Length > 1 && !dic.ContainsKey(arr[0]))
+                string romName = arr.Length > 1 ? arr[0].Trim() : "";
+                string romCnName = arr.Length > 1 ? arr[1].Trim() : "";
+                if (romName.Length > 0 && !dic.ContainsKey(romName))
                 {
-                    dic[arr[0]] = arr[1];
+                    dic[romName] = romCnName;
                 }
             }
             return dic;

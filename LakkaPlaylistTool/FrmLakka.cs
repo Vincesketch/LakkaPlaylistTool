@@ -308,12 +308,12 @@ namespace LakkaPlaylistTool
             //使用FBA中文名
             if (this.cbxUseFbaCnName.Checked)
             {
-                translateDic = Utils.getFBA_res();
+                translateDic = translateDic.Union(Utils.getFBA_res()).ToDictionary(key => key.Key, value => value.Value);
             }
             //使用FC中文名
             if (this.cbxUseFcCnName.Checked)
             {
-                translateDic = Utils.getFC_res();
+                translateDic = translateDic.Union(Utils.getFC_res()).ToDictionary(key => key.Key, value => value.Value);
             }
 
             //翻译ROM名称
