@@ -39,8 +39,9 @@ namespace LakkaPlaylistTool
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    DirectoryInfo di = new DirectoryInfo(dialog.SelectedPath);
-                    FileInfo[] files = di.GetFiles();
+                    FrmLakka lakka = new FrmLakka();
+                    ICollection<FileInfo> files = lakka.readRomToMem(dialog.SelectedPath).Values;
+                    lakka.Dispose();
                     Dictionary<string, GameItem> games = new Dictionary<string, GameItem>();
                     foreach (FileInfo fi in files)
                     {

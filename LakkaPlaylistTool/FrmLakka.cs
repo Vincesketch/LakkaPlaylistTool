@@ -149,13 +149,24 @@ namespace LakkaPlaylistTool
             }
         }
 
-        private Dictionary<string, FileInfo> readRomToMem(string dir)
+        public Dictionary<string, FileInfo> readRomToMem(string dir)
         {
             Dictionary<string, FileInfo> roms = new Dictionary<string, FileInfo>();
             FileInfo[] fileList = new DirectoryInfo(dir).GetFiles();
             foreach (FileInfo file in fileList)
             {
-                roms.Add(Utils.GetFileNameWithOutExtention(file), file);
+                if (file.Extension.ToLower() == ".txt") continue;
+                if (file.Extension.ToLower() == ".db") continue;
+                string romeName = Utils.GetFileNameWithOutExtention(file);
+                if (!roms.ContainsKey(romeName)) roms.Add(romeName, file);
+            }
+            // Read Child Directory
+            foreach (DirectoryInfo di in (new DirectoryInfo(dir)).GetDirectories())
+            {
+                Dictionary<string, FileInfo> romsFromChildDir = new Dictionary<string, FileInfo>();
+                romsFromChildDir = readRomToMem(di.FullName);
+                if (romsFromChildDir.Count == 0) continue;
+                roms = roms.Union(romsFromChildDir).ToDictionary(key => key.Key, value => value.Value);
             }
             return roms;
         }
