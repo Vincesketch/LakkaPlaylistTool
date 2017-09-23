@@ -47,7 +47,7 @@ namespace LakkaPlaylistTool
                     {
                         GameItem item = new GameItem();
                         item.V1RomFullFileName = fi.FullName;
-                        item.V2RomCnName = item.getRomShortFileNameWithOutExtension();
+                        item.V2RomCnName = fi.FullName.Remove(fi.FullName.LastIndexOf(fi.Extension)); //item.getRomShortFileNameWithOutExtension();
                         item.V3coreBinaryPath = "DETECT_CORE";
                         item.V4EmuType = "DETECT_TYPE";
                         item.V5Crc32 = "DETECT";

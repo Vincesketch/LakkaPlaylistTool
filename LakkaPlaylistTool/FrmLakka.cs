@@ -157,6 +157,10 @@ namespace LakkaPlaylistTool
             {
                 if (file.Extension.ToLower() == ".txt") continue;
                 if (file.Extension.ToLower() == ".db") continue;
+                if (file.Extension.ToLower() == ".png") continue;
+                if (file.Extension.ToLower() == ".gif") continue;
+                if (file.Extension.ToLower() == ".xls") continue;
+                if (file.Extension.ToLower() == ".exe") continue;
                 string romeName = Utils.GetFileNameWithOutExtention(file);
                 if (!roms.ContainsKey(romeName)) roms.Add(romeName, file);
             }
@@ -166,7 +170,11 @@ namespace LakkaPlaylistTool
                 Dictionary<string, FileInfo> romsFromChildDir = new Dictionary<string, FileInfo>();
                 romsFromChildDir = readRomToMem(di.FullName);
                 if (romsFromChildDir.Count == 0) continue;
-                roms = roms.Union(romsFromChildDir).ToDictionary(key => key.Key, value => value.Value);
+                foreach(var v in romsFromChildDir)
+                {
+                    if (roms.ContainsKey(v.Key)) continue;
+                    roms.Add(v.Key, v.Value);
+                }
             }
             return roms;
         }
