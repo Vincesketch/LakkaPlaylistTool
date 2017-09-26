@@ -2,7 +2,10 @@
 
 Developed By Microsoft C#, DotNet 4.0 framework.
 
-Maintain Lakka playlist and convert Retro playlist to Lakka
+Main feature:
+1. Generate simple Lakka playlist from rom directory
+2. Lakka and ES playlist interconversion
+3. Edit Lakka playlist
 
 主要功能：
 
