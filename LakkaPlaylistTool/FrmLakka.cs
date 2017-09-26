@@ -309,15 +309,8 @@ namespace LakkaPlaylistTool
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private List<GameItem> sortAndTranslate()
         {
-            if (m_games.Count == 0 || m_roms.Count == 0)
-            {
-                MessageBox.Show("请先进行选择");
-                return;
-            }
-            CheckAll();
-
             //排序
             List<GameItem> sortedList = new List<GameItem>();
             sortedList.AddRange(m_games.Values);
@@ -361,6 +354,19 @@ namespace LakkaPlaylistTool
                     }
                 }
             }
+            return sortedList;
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (m_games.Count == 0 || m_roms.Count == 0)
+            {
+                MessageBox.Show("请先进行选择");
+                return;
+            }
+            CheckAll();
+
+            List<GameItem> sortedList = sortAndTranslate();
 
             readImageBitToMem(sortedList);
 
@@ -389,7 +395,9 @@ namespace LakkaPlaylistTool
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 m_cacheFileDialogPath = fileDialog.FileName;
-                count = doAction(this.m_finallyGames, fileDialog.FileName);
+                List<GameItem> sortedList = sortAndTranslate();
+                readImageBitToMem(sortedList);
+                count = doAction(sortedList, fileDialog.FileName);
 
             }
             this.label1.Text = ("保存<" + count.ToString() + ">个rom到新文件中");

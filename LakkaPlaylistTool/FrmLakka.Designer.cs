@@ -38,6 +38,8 @@
             this.cbxUseFbaCnName = new System.Windows.Forms.CheckBox();
             this.cbxUseFcCnName = new System.Windows.Forms.CheckBox();
             this.cbxUseMdCnName = new System.Windows.Forms.CheckBox();
+            this.cbxUseSfcCnName = new System.Windows.Forms.CheckBox();
+            this.cbxUsePceCnName = new System.Windows.Forms.CheckBox();
             this.btnLoadLakkaList = new System.Windows.Forms.Button();
             this.txtLakkaRom = new System.Windows.Forms.TextBox();
             this.txtRetroImage = new System.Windows.Forms.TextBox();
@@ -50,8 +52,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cbxUseSfcCnName = new System.Windows.Forms.CheckBox();
-            this.cbxUsePceCnName = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,11 +60,11 @@
             // 
             this.cbxCrc32.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxCrc32.AutoSize = true;
-            this.cbxCrc32.Location = new System.Drawing.Point(296, 376);
+            this.cbxCrc32.Location = new System.Drawing.Point(295, 376);
             this.cbxCrc32.Name = "cbxCrc32";
             this.cbxCrc32.Size = new System.Drawing.Size(99, 19);
             this.cbxCrc32.TabIndex = 12;
-            this.cbxCrc32.Text = "获取CRC32";
+            this.cbxCrc32.Text = "读取CRC32";
             this.toolTip1.SetToolTip(this.cbxCrc32, "生成CRC32会耗费比较长的时间");
             this.cbxCrc32.UseVisualStyleBackColor = true;
             // 
@@ -73,7 +73,7 @@
             this.btnLoadRomDir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoadRomDir.Location = new System.Drawing.Point(5, 159);
             this.btnLoadRomDir.Name = "btnLoadRomDir";
-            this.btnLoadRomDir.Size = new System.Drawing.Size(283, 69);
+            this.btnLoadRomDir.Size = new System.Drawing.Size(282, 69);
             this.btnLoadRomDir.TabIndex = 2;
             this.btnLoadRomDir.Text = "3. 选择游戏ROM目录";
             this.btnLoadRomDir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -86,7 +86,7 @@
             this.btnRetroImageDir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRetroImageDir.Location = new System.Drawing.Point(5, 82);
             this.btnRetroImageDir.Name = "btnRetroImageDir";
-            this.btnRetroImageDir.Size = new System.Drawing.Size(283, 69);
+            this.btnRetroImageDir.Size = new System.Drawing.Size(282, 69);
             this.btnRetroImageDir.TabIndex = 10;
             this.btnRetroImageDir.Text = "2. 选择图片目录";
             this.btnRetroImageDir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -99,7 +99,7 @@
             this.btnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEdit.Location = new System.Drawing.Point(5, 236);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(283, 107);
+            this.btnEdit.Size = new System.Drawing.Size(282, 107);
             this.btnEdit.TabIndex = 6;
             this.btnEdit.Text = "4. 编辑Lakka列表";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -111,9 +111,9 @@
             // 
             this.cbxCopyRoms.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxCopyRoms.AutoSize = true;
-            this.cbxCopyRoms.Location = new System.Drawing.Point(582, 376);
+            this.cbxCopyRoms.Location = new System.Drawing.Point(579, 376);
             this.cbxCopyRoms.Name = "cbxCopyRoms";
-            this.cbxCopyRoms.Size = new System.Drawing.Size(106, 19);
+            this.cbxCopyRoms.Size = new System.Drawing.Size(109, 19);
             this.cbxCopyRoms.TabIndex = 13;
             this.cbxCopyRoms.Text = "重新拷贝ROM";
             this.toolTip1.SetToolTip(this.cbxCopyRoms, "重新拷贝整理后的ROM,如果对ROM有删减，可以重新拷贝一个干净的ROM目录");
@@ -155,12 +155,36 @@
             this.toolTip1.SetToolTip(this.cbxUseMdCnName, "使用MD数据库中的中文名称作为ROM名称");
             this.cbxUseMdCnName.UseVisualStyleBackColor = true;
             // 
+            // cbxUseSfcCnName
+            // 
+            this.cbxUseSfcCnName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbxUseSfcCnName.AutoSize = true;
+            this.cbxUseSfcCnName.Location = new System.Drawing.Point(129, 28);
+            this.cbxUseSfcCnName.Name = "cbxUseSfcCnName";
+            this.cbxUseSfcCnName.Size = new System.Drawing.Size(128, 19);
+            this.cbxUseSfcCnName.TabIndex = 23;
+            this.cbxUseSfcCnName.Text = "使用SFC中文名";
+            this.toolTip1.SetToolTip(this.cbxUseSfcCnName, "使用SFC数据库中的中文名称作为ROM名称");
+            this.cbxUseSfcCnName.UseVisualStyleBackColor = true;
+            // 
+            // cbxUsePceCnName
+            // 
+            this.cbxUsePceCnName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbxUsePceCnName.AutoSize = true;
+            this.cbxUsePceCnName.Location = new System.Drawing.Point(3, 53);
+            this.cbxUsePceCnName.Name = "cbxUsePceCnName";
+            this.cbxUsePceCnName.Size = new System.Drawing.Size(128, 19);
+            this.cbxUsePceCnName.TabIndex = 24;
+            this.cbxUsePceCnName.Text = "使用PCE中文名";
+            this.toolTip1.SetToolTip(this.cbxUsePceCnName, "使用PCE数据库中的中文名称作为ROM名称");
+            this.cbxUsePceCnName.UseVisualStyleBackColor = true;
+            // 
             // btnLoadLakkaList
             // 
             this.btnLoadLakkaList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoadLakkaList.Location = new System.Drawing.Point(5, 5);
             this.btnLoadLakkaList.Name = "btnLoadLakkaList";
-            this.btnLoadLakkaList.Size = new System.Drawing.Size(283, 69);
+            this.btnLoadLakkaList.Size = new System.Drawing.Size(282, 69);
             this.btnLoadLakkaList.TabIndex = 0;
             this.btnLoadLakkaList.Text = "1. 加载Lakka列表文件(lpl文件)";
             this.btnLoadLakkaList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -170,21 +194,21 @@
             // txtLakkaRom
             // 
             this.txtLakkaRom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLakkaRom.Location = new System.Drawing.Point(296, 159);
+            this.txtLakkaRom.Location = new System.Drawing.Point(295, 159);
             this.txtLakkaRom.Multiline = true;
             this.txtLakkaRom.Name = "txtLakkaRom";
             this.txtLakkaRom.ReadOnly = true;
-            this.txtLakkaRom.Size = new System.Drawing.Size(278, 69);
+            this.txtLakkaRom.Size = new System.Drawing.Size(276, 69);
             this.txtLakkaRom.TabIndex = 3;
             // 
             // txtRetroImage
             // 
             this.txtRetroImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRetroImage.Location = new System.Drawing.Point(296, 82);
+            this.txtRetroImage.Location = new System.Drawing.Point(295, 82);
             this.txtRetroImage.Multiline = true;
             this.txtRetroImage.Name = "txtRetroImage";
             this.txtRetroImage.ReadOnly = true;
-            this.txtRetroImage.Size = new System.Drawing.Size(278, 69);
+            this.txtRetroImage.Size = new System.Drawing.Size(276, 69);
             this.txtRetroImage.TabIndex = 11;
             // 
             // label1
@@ -200,11 +224,11 @@
             // txtLakkaList
             // 
             this.txtLakkaList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLakkaList.Location = new System.Drawing.Point(296, 5);
+            this.txtLakkaList.Location = new System.Drawing.Point(295, 5);
             this.txtLakkaList.Multiline = true;
             this.txtLakkaList.Name = "txtLakkaList";
             this.txtLakkaList.ReadOnly = true;
-            this.txtLakkaList.Size = new System.Drawing.Size(278, 69);
+            this.txtLakkaList.Size = new System.Drawing.Size(276, 69);
             this.txtLakkaList.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -213,7 +237,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.46041F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.53959F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114F));
             this.tableLayoutPanel1.Controls.Add(this.cbxCrc32, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
@@ -246,7 +270,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(582, 156);
+            this.label4.Location = new System.Drawing.Point(579, 156);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 15);
             this.label4.TabIndex = 15;
@@ -255,7 +279,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(582, 2);
+            this.label3.Location = new System.Drawing.Point(579, 2);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 15);
             this.label3.TabIndex = 14;
@@ -264,7 +288,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(582, 79);
+            this.label2.Location = new System.Drawing.Point(579, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 15);
             this.label2.TabIndex = 13;
@@ -275,7 +299,7 @@
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSave.Location = new System.Drawing.Point(5, 351);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(283, 69);
+            this.btnSave.Size = new System.Drawing.Size(282, 69);
             this.btnSave.TabIndex = 16;
             this.btnSave.Text = "5. 保存";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -285,7 +309,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(582, 233);
+            this.label5.Location = new System.Drawing.Point(579, 233);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 15);
             this.label5.TabIndex = 18;
@@ -299,34 +323,10 @@
             this.flowLayoutPanel1.Controls.Add(this.cbxUseSfcCnName);
             this.flowLayoutPanel1.Controls.Add(this.cbxUsePceCnName);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(296, 236);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(295, 236);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(278, 107);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(276, 107);
             this.flowLayoutPanel1.TabIndex = 20;
-            // 
-            // cbxUseSfcCnName
-            // 
-            this.cbxUseSfcCnName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cbxUseSfcCnName.AutoSize = true;
-            this.cbxUseSfcCnName.Location = new System.Drawing.Point(129, 28);
-            this.cbxUseSfcCnName.Name = "cbxUseSfcCnName";
-            this.cbxUseSfcCnName.Size = new System.Drawing.Size(128, 19);
-            this.cbxUseSfcCnName.TabIndex = 23;
-            this.cbxUseSfcCnName.Text = "使用SFC中文名";
-            this.toolTip1.SetToolTip(this.cbxUseSfcCnName, "使用SFC数据库中的中文名称作为ROM名称");
-            this.cbxUseSfcCnName.UseVisualStyleBackColor = true;
-            // 
-            // cbxUsePceCnName
-            // 
-            this.cbxUsePceCnName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cbxUsePceCnName.AutoSize = true;
-            this.cbxUsePceCnName.Location = new System.Drawing.Point(3, 53);
-            this.cbxUsePceCnName.Name = "cbxUsePceCnName";
-            this.cbxUsePceCnName.Size = new System.Drawing.Size(128, 19);
-            this.cbxUsePceCnName.TabIndex = 24;
-            this.cbxUsePceCnName.Text = "使用PCE中文名";
-            this.toolTip1.SetToolTip(this.cbxUsePceCnName, "使用PCE数据库中的中文名称作为ROM名称");
-            this.cbxUsePceCnName.UseVisualStyleBackColor = true;
             // 
             // FrmLakka
             // 
